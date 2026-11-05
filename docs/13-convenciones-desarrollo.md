@@ -3,7 +3,7 @@
 ## 1. Estructura del repositorio (propuesta)
 
 ```
-sistema-gestion-escolar/
+rexaedu/
 ├── apps/
 │   ├── web/              # Next.js (portales admin, profesor, alumno, encargado)
 │   └── api/              # NestJS (API REST, webhooks, workers)

@@ -1,4 +1,4 @@
-# Sistema de Gestión Escolar (nombre comercial por definir)
+# RexaEdu — Sistema de Gestión Escolar
 
 Plataforma web **SaaS multi-colegio** para la gestión académica: portal para **alumnos**, **profesores**, **administradores** y un **canal de WhatsApp para padres/encargados** que consulta en tiempo real el avance académico del estudiante.
 

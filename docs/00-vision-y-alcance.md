@@ -12,7 +12,7 @@ En muchos colegios la comunicación académica está fragmentada:
 
 ## 2. Visión
 
-> Ser la plataforma escolar más simple de adoptar en Latinoamérica, donde **el padre de familia se entera del avance de su hijo por WhatsApp**, el profesor ahorra tiempo y el colegio tiene control total de su información académica.
+> Que RexaEdu sea la plataforma escolar más simple de adoptar en Latinoamérica, donde **el padre de familia se entera del avance de su hijo por WhatsApp**, el profesor ahorra tiempo y el colegio tiene control total de su información académica.
 
 ## 3. Objetivos del producto
 
