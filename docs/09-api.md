@@ -1,6 +1,6 @@
 # 09 · API REST (borrador inicial)
 
-- Base: `https://{colegio}.plataforma.com/api/v1`
+- Base: `https://{colegio}.rexaedu.com/api/v1`
 - Autenticación: `Authorization: Bearer <access_token>`
 - El colegio se resuelve por subdominio y se valida contra el token.
 - Respuestas JSON; errores con formato `{ "error": { "code": "...", "message": "...", "details": [...] } }`.
@@ -10,11 +10,11 @@
 ## Autenticación
 | Método | Ruta | Descripción |
 |---|---|---|
-| POST | `/auth/login` | Login (usuario/correo + contraseña) |
-| POST | `/auth/2fa/verify` | Segundo factor |
+| POST | `/auth/login` | Login (usuario o código de alumno + contraseña/PIN) |
+| POST | `/auth/password/change` | Cambio obligatorio de contraseña temporal |
 | POST | `/auth/refresh` | Renovar token |
 | POST | `/auth/logout` | Cerrar sesión |
-| POST | `/auth/password/forgot` · `/auth/password/reset` | Recuperación |
+| POST | `/auth/password/forgot` · `/auth/password/reset` | Recuperación por correo (solo personal con correo) |
 | GET | `/me` | Usuario actual, roles y espacios disponibles |
 
 ## Administración
@@ -29,6 +29,8 @@
 | CRUD | `/admin/schedule-blocks` | Horarios (valida choques) |
 | CRUD | `/admin/students`, `/admin/teachers`, `/admin/guardians` | Usuarios |
 | POST | `/admin/guardians/:id/students` | Vincular encargado ↔ alumno |
+| POST | `/admin/users/:id/reset-credentials` | Generar nueva contraseña/PIN temporal |
+| GET | `/admin/sections/:id/access-cards` | PDF de tarjetas de acceso de la sección |
 | POST | `/admin/imports` · GET `/admin/imports/:id` | Importación Excel/CSV y su resultado |
 | CRUD | `/admin/announcements` | Anuncios |
 | CRUD | `/admin/forums` | Foros |
@@ -90,4 +92,5 @@
 |---|---|---|
 | CRUD | `/platform/schools` | Colegios |
 | PATCH | `/platform/schools/:id/modules` | Módulos activos |
+| GET/PUT | `/platform/schools/:id/theme` | Tema visual del colegio |
 | GET | `/platform/schools/:id/usage` | Uso |

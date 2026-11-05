@@ -14,19 +14,21 @@ Los códigos (`RF-ADM-01`, etc.) se usarán como referencia en issues y commits.
 
 | Código | Requerimiento | Prioridad |
 |---|---|---|
-| RF-PLT-01 | Alta, edición y suspensión de colegios (tenants), con subdominio propio (`colegio.miplataforma.com`). | MVP |
+| RF-PLT-01 | Alta, edición y suspensión de colegios (tenants), con subdominio propio (`colegio.rexaedu.com`). | MVP |
 | RF-PLT-02 | Asignar plan y módulos activos por colegio (Académico, WhatsApp, Asistencia, Pagos...). | MVP |
 | RF-PLT-03 | Crear el primer Administrador del colegio e invitarlo por correo. | MVP |
 | RF-PLT-04 | Panel de uso por colegio (alumnos activos, mensajes WhatsApp, almacenamiento). | MVP |
 | RF-PLT-05 | Acceso de soporte "como colegio" con consentimiento y bitácora. | PLUS |
 | RF-PLT-06 | Facturación de la plataforma a colegios (suscripción). | PLUS |
+| RF-PLT-07 | Editor visual de marca: crear y editar el tema de cada colegio con vista previa en vivo; activar extensiones a la medida. | MVP |
 
 ## 2. Módulo de Administración del colegio
 
 ### 2.1 Configuración
 | Código | Requerimiento | Prioridad |
 |---|---|---|
-| RF-ADM-01 | Datos del colegio: nombre, logo, colores, dirección, zona horaria, idioma, moneda. | MVP |
+| RF-ADM-01 | Datos del colegio: nombre, logo, dirección, zona horaria, idioma, moneda. | MVP |
+| RF-ADM-07 | Tema visual del colegio (colores, tipografía, estilo de componentes, widgets del inicio, página de login), definido por el equipo de RexaEdu con el editor de marca. Ver [Diseño UI/UX](14-diseno-ui-ux.md). | MVP |
 | RF-ADM-02 | Ciclos escolares: crear, activar, cerrar. Solo un ciclo activo a la vez por nivel. | MVP |
 | RF-ADM-03 | Periodos de evaluación por ciclo (bimestres, trimestres, etc.) con fechas y peso en la nota final. | MVP |
 | RF-ADM-04 | Escalas de calificación (0–100, 0–10, letras A–F, cualitativa) y nota mínima de aprobación, configurables por nivel. | MVP |
@@ -52,7 +54,7 @@ Los códigos (`RF-ADM-01`, etc.) se usarán como referencia en issues y commits.
 | RF-ADM-22 | CRUD de encargados y vínculo encargado–alumno (parentesco, puede consultar, contacto principal, teléfono WhatsApp). | MVP |
 | RF-ADM-23 | Importación masiva desde Excel/CSV (alumnos, encargados, profesores) con validación y reporte de errores. | MVP |
 | RF-ADM-24 | Inscripción de alumnos a secciones; traslados entre secciones conservando el historial. | MVP |
-| RF-ADM-25 | Invitación por correo / generación de credenciales; restablecer contraseña. | MVP |
+| RF-ADM-25 | Generación de credenciales (usuario + contraseña/PIN temporal) e impresión de **tarjetas de acceso** por sección; restablecer contraseña desde administración (y desde el profesor titular para sus alumnos). El correo es **opcional**: los alumnos, sobre todo de primaria, no lo necesitan. Profesores y administradores pueden recibir invitación por correo si lo tienen. | MVP |
 | RF-ADM-26 | Activar / desactivar usuarios (retiro de alumno, baja de profesor). | MVP |
 
 ### 2.4 Comunicación
@@ -113,7 +115,7 @@ Los códigos (`RF-ADM-01`, etc.) se usarán como referencia en issues y commits.
 | RF-ALU-07 | Horario semanal. | MVP |
 | RF-ALU-08 | Observaciones visibles para el alumno. | MVP |
 | RF-ALU-09 | Participar en foros habilitados. | MVP |
-| RF-ALU-10 | Notificaciones (en la app y por correo): nueva tarea, tarea calificada, recordatorio de entrega. | MVP |
+| RF-ALU-10 | Notificaciones **dentro de la aplicación** (y push web si el alumno instala la PWA): nueva tarea, tarea calificada, recordatorio de entrega. Sin correo para alumnos. | MVP |
 | RF-ALU-11 | Simulador "¿qué nota necesito?" para alcanzar el mínimo o una meta. | PLUS |
 | RF-ALU-12 | Descargar boleta del periodo. | MVP |
 
@@ -175,7 +177,7 @@ Detalle técnico en [Integración WhatsApp](08-integracion-whatsapp.md).
 | RNF-02 | **Responsive / PWA**: usable desde celular de gama baja (la mayoría de alumnos y padres usan celular). |
 | RNF-03 | Tiempo de respuesta < 500 ms en el p95 para pantallas comunes; respuesta del bot < 3 s. |
 | RNF-04 | Disponibilidad 99,5 % mensual. Respaldos diarios con retención de 30 días y prueba de restauración mensual. |
-| RNF-05 | Seguridad: HTTPS, contraseñas con hash Argon2/bcrypt, 2FA opcional para administradores y profesores, bloqueo por intentos fallidos. |
+| RNF-05 | Seguridad: HTTPS, contraseñas con hash Argon2/bcrypt, bloqueo por intentos fallidos, cambio obligatorio de contraseña temporal en el primer ingreso. (2FA fuera del alcance actual.) |
 | RNF-06 | Privacidad: datos de menores; consentimiento del encargado; cumplimiento de la ley de protección de datos del país. Ver [Seguridad](10-seguridad-y-privacidad.md). |
 | RNF-07 | Internacionalización: textos en archivos de traducción (es por defecto), formatos de fecha y número por país. |
 | RNF-08 | Accesibilidad WCAG 2.1 AA en los portales. |

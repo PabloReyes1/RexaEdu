@@ -9,7 +9,8 @@ rexaedu/
 │   └── api/              # NestJS (API REST, webhooks, workers)
 ├── packages/
 │   ├── shared/           # Tipos, esquemas de validación (zod), constantes, cálculo de promedios
-│   ├── ui/               # Componentes de interfaz compartidos
+│   ├── ui/               # Componentes de interfaz compartidos (sistema de diseño)
+│   ├── themes/           # Temas por colegio: tokens + extensiones a la medida
 │   └── config/           # ESLint, TypeScript, Tailwind compartidos
 ├── infra/
 │   └── docker-compose.yml  # Postgres, Redis, MinIO, Mailpit

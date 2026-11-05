@@ -4,6 +4,7 @@
 
 1. **Un solo producto, muchos colegios** (SaaS multi-tenant). Nada de forks por cliente: todo lo que varía es configuración.
 2. **Modular**: Académico, Comunicación, WhatsApp, Asistencia, Pagos se activan por colegio.
+2. **Interfaz personalizable por colegio** mediante temas (tokens de diseño, variantes de componentes, widgets configurables y extensiones a la medida) sin duplicar código. Ver [Diseño UI/UX](14-diseno-ui-ux.md).
 3. **Mobile-first**: la mayoría de alumnos y padres usan celular.
 4. **TypeScript de punta a punta** para un equipo pequeño: mismo lenguaje en frontend y backend, tipos compartidos.
 5. **Empezar como monolito modular**, no microservicios. Separar servicios solo cuando la carga lo justifique (el worker de WhatsApp es el primer candidato).
@@ -19,8 +20,8 @@
 | Colas y caché | **Redis + BullMQ** | Recálculo de promedios, envíos de WhatsApp/correo, recordatorios programados. |
 | Archivos | **Almacenamiento compatible con S3** (AWS S3, Cloudflare R2, MinIO en local) | Entregas de alumnos y material; URLs firmadas temporales. |
 | WhatsApp | **WhatsApp Business Platform – Cloud API (Meta)** | Oficial, sin riesgo de bloqueo del número; alternativa vía BSP (Twilio, 360dialog) si se prefiere. |
-| Correo | Proveedor transaccional (Amazon SES, Resend, Postmark) | Invitaciones, recuperación de contraseña, notificaciones. |
-| Autenticación | Propia con JWT (access + refresh) o Auth.js; 2FA TOTP | Control total del multi-tenant y roles. |
+| Correo | Proveedor transaccional (Amazon SES, Resend, Postmark) | Solo para personal (administradores y profesores) que tenga correo: invitaciones y avisos. Los alumnos no usan correo. |
+| Autenticación | Propia con JWT (access + refresh) o Auth.js; usuario + contraseña/PIN (2FA fuera del alcance actual) | Control total del multi-tenant y roles. |
 | Búsqueda (futuro) | PostgreSQL full-text → Meilisearch si crece | |
 | Observabilidad | Sentry (errores), OpenTelemetry + Grafana/Loki (logs y métricas) | |
 | Infraestructura | Docker; despliegue inicial en un PaaS (Railway, Render, Fly.io) o VPS; luego AWS/GCP | Costos bajos al inicio. |
@@ -70,7 +71,7 @@ flowchart LR
 
 ```
 apps/api/src/modules/
-├── auth/            # login, refresh, 2FA, recuperación
+├── auth/            # login, refresh, credenciales temporales, restablecimiento
 ├── tenancy/         # colegios, planes, módulos activos, resolución de tenant
 ├── users/           # usuarios, roles, perfiles (alumno, profesor, encargado)
 ├── academic/        # ciclos, periodos, niveles, grados, secciones, materias, clases, asignaciones
@@ -102,11 +103,14 @@ CREATE POLICY aislamiento_colegio ON actividad
 - Archivos en S3 con prefijo `colegio_id/`.
 - Colegios grandes que lo exijan (plan Enterprise) podrían tener base de datos dedicada en el futuro; el código no cambia.
 
-**Resolución del tenant:** `colegio-san-jose.plataforma.com` → `colegio.slug = 'colegio-san-jose'`. Opcional: dominio propio del colegio (`portal.colegiosanjose.edu.gt`).
+**Resolución del tenant:** `colegio-san-jose.rexaedu.com` → `colegio.slug = 'colegio-san-jose'`. Opcional: dominio propio del colegio (`portal.colegiosanjose.edu.gt`).
 
 ## 6. Autenticación y sesión
 
-- Login con correo/usuario + contraseña; los alumnos pequeños pueden usar **código + PIN** generado por el colegio.
+- Login con **usuario + contraseña**. El usuario del alumno es su **código/carné** (no requiere correo); los alumnos de primaria pueden usar un **PIN numérico** generado por el colegio.
+- El colegio entrega **tarjetas de acceso impresas** por sección con usuario y contraseña temporal; en el primer ingreso se obliga a cambiarla (opcional para primaria baja).
+- Si un alumno olvida su contraseña, la restablece el administrador o su profesor titular (no hay recuperación por correo para alumnos).
+- **2FA queda fuera del alcance actual.**
 - (Plus) "Iniciar sesión con Google / Microsoft" para colegios con Google Workspace for Education o Microsoft 365.
 - Access token de corta duración (15 min) + refresh token rotativo en cookie `httpOnly`.
 - El token incluye `usuario_id`, `colegio_id` y los roles; el **alcance** (qué clases) se valida en el servidor en cada petición.
@@ -118,7 +122,7 @@ Un servicio único `NotificationService.notify(evento, destinatarios)` decide lo
 | Canal | Uso |
 |---|---|
 | En la aplicación (campana) | Todo |
-| Correo | Invitaciones, resúmenes, avisos importantes |
+| Correo | Solo personal con correo: invitaciones y avisos importantes |
 | Push web (PWA) | Nueva tarea, tarea calificada, recordatorio |
 | WhatsApp | Encargados: anuncios, alertas, observaciones (con plantilla) |
 

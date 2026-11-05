@@ -64,7 +64,7 @@ flowchart TD
     B -- No --> B1["No encontramos tu número. Pide a tu colegio que lo registre."]
     B -- Sí, en varios colegios --> B2[Elegir colegio] --> C
     B -- Sí --> C{¿whatsapp_verificado?}
-    C -- No --> D[Pedir dato de verificación:<br/>código del alumno o código de 6 dígitos<br/>enviado por correo / entregado por el colegio]
+    C -- No --> D[Pedir dato de verificación:<br/>código del alumno o código de 6 dígitos<br/>entregado por el colegio en la tarjeta de acceso]
     D --> E{¿Correcto?}
     E -- No, < 3 intentos --> D
     E -- No, 3 intentos --> E1[Bloqueo 24 h + aviso al colegio]

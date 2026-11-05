@@ -16,7 +16,7 @@ Cada país tiene su ley de protección de datos personales; algunos ejemplos en 
 |---|---|
 | Aislamiento | RLS por colegio en PostgreSQL + pruebas automatizadas que intentan leer datos de otro colegio. |
 | Autorización | Guardias por rol y por alcance en cada endpoint; nunca confiar en IDs enviados por el cliente sin validar pertenencia. |
-| Contraseñas | Argon2id; política mínima; bloqueo progresivo; 2FA para administradores (obligatorio) y profesores (opcional). |
+| Contraseñas | Argon2id; política mínima (para alumnos de primaria se permite PIN numérico generado por el colegio); bloqueo progresivo por intentos fallidos. **2FA queda fuera del alcance actual**; se evaluará más adelante solo para administradores. |
 | Sesiones | Access token 15 min, refresh rotativo, revocación al cambiar contraseña. |
 | Transporte | HTTPS/TLS 1.2+, HSTS. |
 | Datos en reposo | Cifrado de disco/BD del proveedor; archivos en bucket privado; URLs firmadas de corta duración. |

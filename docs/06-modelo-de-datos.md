@@ -35,14 +35,14 @@ erDiagram
     USUARIO {
         uuid id PK
         uuid colegio_id FK
-        string correo
-        string usuario
+        string correo "opcional: alumnos de primaria no tienen"
+        string usuario "unico por colegio, alumnos usan su codigo"
         string hash_password
         string nombres
         string apellidos
         string telefono
         bool activo
-        bool tiene_2fa
+        bool debe_cambiar_password
     }
     USUARIO_ROL {
         uuid usuario_id FK

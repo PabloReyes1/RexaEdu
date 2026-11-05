@@ -28,7 +28,9 @@ gantt
 ## Fase 0 — Documentación y diseño *(actual)*
 - [x] Visión, alcance, roles, requerimientos.
 - [x] Modelo académico flexible, modelo de datos, flujos, arquitectura.
-- [ ] Wireframes de pantallas clave (Figma): dashboard alumno, libro de calificaciones, crear tarea, asistente de asignación, configuración inicial.
+- [x] Lineamientos de diseño UI/UX y personalización por colegio ([14](14-diseno-ui-ux.md)).
+- [ ] Sistema de diseño base (tokens + componentes) y 3 temas de muestra.
+- [ ] Prototipos navegables de las pantallas MVP: inicio alumno, libro de calificaciones, crear tarea, asistente de asignación, configuración inicial.
 - [ ] Validar con 2–3 colegios reales (entrevistas a dirección, profesores y padres).
 - [ ] Escribir ADR-0001 a ADR-0004.
 - [ ] Crear cuenta de Meta Business y número de prueba de WhatsApp.
@@ -54,7 +56,7 @@ gantt
 - Promedios en portal alumno; cierre de periodo; boletas PDF; bitácora.
 
 **Sprint 9 · Comunicación**
-- Anuncios segmentados, foros, observaciones, notificaciones (app, correo, push).
+- Anuncios segmentados, foros, observaciones, notificaciones (app y push; correo solo para personal).
 
 **Sprint 10–11 · WhatsApp**
 - Webhook, verificación, máquina de estados, menús y consultas (pendientes, próximas, no entregadas, notas, desglose).

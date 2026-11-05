@@ -2,7 +2,9 @@
 
 Plataforma web **SaaS multi-colegio** para la gestión académica: portal para **alumnos**, **profesores**, **administradores** y un **canal de WhatsApp para padres/encargados** que consulta en tiempo real el avance académico del estudiante.
 
-> El producto es **estándar**: no se construye para un colegio específico. Cada institución se configura (niveles, grados, secciones, escalas de calificación, periodos, modelo de asignación docente) sin tocar código.
+> El **núcleo funcional es estándar**: no se construye para un colegio específico. Cada institución se configura (niveles, grados, secciones, escalas de calificación, periodos, modelo de asignación docente) sin tocar código.
+>
+> La **experiencia visual es a la medida**: cada colegio recibe una interfaz con su propia identidad (colores, tipografía, estilo, página de inicio, secciones especiales), construida sobre las mismas funcionalidades. Ver [Diseño UI/UX](docs/14-diseno-ui-ux.md).
 
 ## Propuesta de valor
 
@@ -31,6 +33,7 @@ Plataforma web **SaaS multi-colegio** para la gestión académica: portal para *
 | 11 | [Funcionalidades Plus y benchmark](docs/11-funcionalidades-plus.md) | Comparativa con plataformas existentes y diferenciadores para vender |
 | 12 | [Roadmap](docs/12-roadmap.md) | Fases (MVP → Asistencia → Pagos → Plus) |
 | 13 | [Convenciones de desarrollo](docs/13-convenciones-desarrollo.md) | Estructura del repo, ramas, commits, calidad |
+| 14 | [Diseño UI/UX y personalización](docs/14-diseno-ui-ux.md) | Temas por colegio, principios de diseño, personas, mapa de pantallas |
 
 ## Estado
 

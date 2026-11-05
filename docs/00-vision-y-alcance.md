@@ -28,7 +28,8 @@ En muchos colegios la comunicación académica está fragmentada:
 
 ### 4.1 Dentro del alcance (versión 1 / MVP)
 
-1. **Multi-colegio (multi-tenant):** cada colegio con sus datos aislados, su logo, colores y configuración.
+1. **Multi-colegio (multi-tenant):** cada colegio con sus datos aislados y su configuración.
+1. **Diseño a la medida por colegio:** cada institución recibe una interfaz con su propia identidad visual sobre el mismo núcleo funcional (ver [Diseño UI/UX](14-diseno-ui-ux.md)).
 2. **Portal de Administrador:** estructura académica (ciclos, periodos, niveles, grados, secciones, materias), usuarios, asignación de docentes, horarios, anuncios, foros, configuración de calificación.
 3. **Portal de Profesor:** clases asignadas, tareas/actividades, calificación, notas (apuntes/material), observaciones de alumnos, anuncios a sus clases.
 4. **Portal de Alumno:** tareas próximas, entrega de tareas, calificaciones, promedio por curso y general, horario, material y anuncios.

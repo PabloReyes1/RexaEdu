@@ -29,14 +29,14 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    A[Usuario entra a colegio.plataforma.com] --> B[Resolver colegio por subdominio]
+    A[Usuario entra a colegio.rexaedu.com] --> B[Resolver colegio por subdominio]
     B --> C{¿Colegio activo?}
     C -- No --> X[Página de servicio suspendido]
     C -- Sí --> D[Formulario de login con branding del colegio]
     D --> E{¿Credenciales válidas?}
     E -- No --> E1[Incrementar intentos<br/>bloquear tras 5] --> D
-    E -- Sí --> F{¿Tiene 2FA?}
-    F -- Sí --> F1[Pedir código TOTP] --> G
+    E -- Sí --> F{¿Contraseña temporal?}
+    F -- Sí --> F1[Obligar cambio de contraseña / PIN] --> G
     F -- No --> G{¿Cuántos roles tiene?}
     G -- Uno --> H[Ir a su portal]
     G -- Varios --> I[Elegir espacio:<br/>Administrador / Profesor / Alumno / Encargado] --> H
@@ -51,7 +51,7 @@ flowchart TD
     C --> D{¿Publicar ahora?}
     D -- Programar --> D1[Estado BORRADOR con publicar_en] --> D2[Worker publica a la hora indicada] --> E
     D -- Sí --> E[Estado PUBLICADA]
-    E --> F[Notificar alumnos: app, correo, push]
+    E --> F[Notificar alumnos: en la app y push web]
     E --> G[Disponible en consultas de WhatsApp<br/>tareas próximas / pendientes]
     F --> H[Recordatorio automático 24 h antes del vencimiento<br/>a alumnos sin entrega]
     H --> I{¿El alumno entregó?}
@@ -128,7 +128,7 @@ flowchart TD
     E -- Sí --> E1[Worker publica a la hora indicada] --> F
     E -- No --> F[Publicar]
     F --> G[Resolver destinatarios]
-    G --> H[Notificación en app / correo / push]
+    G --> H[Notificación en app / push<br/>correo solo a personal con correo]
     G --> I{¿Enviar por WhatsApp?}
     I -- Sí --> J[Plantilla aprobada a encargados con opt-in<br/>en lotes respetando límites de Meta]
     I -- No --> K[Fin]
