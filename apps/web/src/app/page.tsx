@@ -41,6 +41,7 @@ const entries: Entry[] = [
     title: "Portal de administración",
     description: "Tablero, estructura académica y asignación docente.",
     icon: LayoutDashboard,
+    href: "/ingresar#demo",
   },
 ];
 

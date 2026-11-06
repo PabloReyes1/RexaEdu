@@ -3,13 +3,14 @@ import {
   Backpack,
   BookOpenCheck,
   CircleHelp,
+  LayoutDashboard,
   LogIn,
   MessageCircle,
   Presentation,
   Sparkles,
 } from "lucide-react";
 import type { Metadata } from "next";
-import { enterAsStudent, enterAsTeacher } from "@/app/actions";
+import { enterAsAdmin, enterAsStudent, enterAsTeacher } from "@/app/actions";
 import { RexaeduLogo, RexaeduMark } from "@/components/brand/rexaedu-logo";
 import { SCHOOL } from "@/demo/queries";
 
@@ -172,6 +173,22 @@ export default function SignInPage() {
                 </span>
                 <span className="text-xs font-normal text-muted-foreground">
                   Titular 3.º Primaria
+                </span>
+              </Button>
+            </form>
+            <p className="text-xs font-semibold text-muted-foreground uppercase">Administración</p>
+            <form action={enterAsAdmin}>
+              <Button
+                type="submit"
+                variant="secondary"
+                className="h-auto w-full flex-col gap-0.5 py-2"
+              >
+                <span className="flex items-center gap-1.5">
+                  <LayoutDashboard aria-hidden />
+                  Lic. Marta López
+                </span>
+                <span className="text-xs font-normal text-muted-foreground">
+                  Coordinación académica
                 </span>
               </Button>
             </form>

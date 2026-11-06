@@ -7,8 +7,13 @@ import {
   ClipboardCheck,
   ClipboardList,
   House,
+  LayoutDashboard,
   LibraryBig,
+  Megaphone,
+  Network,
+  Settings,
   SquarePen,
+  UserCog,
   UsersRound,
   type LucideIcon,
 } from "lucide-react";
@@ -25,6 +30,11 @@ const icons = {
   grade: ClipboardCheck,
   create: SquarePen,
   section: UsersRound,
+  dashboard: LayoutDashboard,
+  structure: Network,
+  assign: UserCog,
+  megaphone: Megaphone,
+  settings: Settings,
 } satisfies Record<string, LucideIcon>;
 
 export type NavIcon = keyof typeof icons;
@@ -97,7 +107,7 @@ export function BottomNav({ items, root }: { items: NavItem[]; root: string }) {
   return (
     <nav
       aria-label="Principal"
-      className="fixed inset-x-0 bottom-0 z-20 border-t border-border bg-surface/95 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden"
+      className="fixed inset-x-0 bottom-0 z-20 border-t border-border bg-surface/95 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden print:hidden"
     >
       <ul
         className="mx-auto grid max-w-lg"

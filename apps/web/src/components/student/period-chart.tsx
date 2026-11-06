@@ -80,26 +80,28 @@ export function PeriodChart({ points, passing }: { points: Point[]; passing: num
           </span>
         ))}
       </div>
-      <table className="sr-only">
-        <caption>Promedio general por periodo</caption>
-        <thead>
-          <tr>
-            <th scope="col">Periodo</th>
-            <th scope="col">Promedio</th>
-          </tr>
-        </thead>
-        <tbody>
-          {points.map((p) => (
-            <tr key={p.name}>
-              <th scope="row">
-                {p.name}
-                {p.current ? " (en curso)" : ""}
-              </th>
-              <td>{p.value === null ? "Sin notas" : formatGrade(p.value)}</td>
+      <div className="sr-only">
+        <table>
+          <caption>Promedio general por periodo</caption>
+          <thead>
+            <tr>
+              <th scope="col">Periodo</th>
+              <th scope="col">Promedio</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {points.map((p) => (
+              <tr key={p.name}>
+                <th scope="row">
+                  {p.name}
+                  {p.current ? " (en curso)" : ""}
+                </th>
+                <td>{p.value === null ? "Sin notas" : formatGrade(p.value)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </figure>
   );
 }

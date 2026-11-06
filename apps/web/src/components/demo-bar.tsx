@@ -32,7 +32,7 @@ export function DemoBar({
   otherPortal: { href: string; label: string };
 }) {
   return (
-    <details className="group border-b border-border bg-surface-muted text-sm">
+    <details className="group border-b border-border bg-surface-muted text-sm print:hidden">
       <summary className="mx-auto flex max-w-[90rem] cursor-pointer list-none items-center gap-2 px-4 py-1.5 text-muted-foreground focus-visible:outline-2 focus-visible:outline-ring [&::-webkit-details-marker]:hidden">
         <FlaskConical className="size-4 shrink-0 text-primary" aria-hidden />
         <span className="font-semibold text-foreground">Demostración</span>
@@ -43,27 +43,29 @@ export function DemoBar({
         </span>
       </summary>
       <div className="mx-auto flex max-w-[90rem] flex-col gap-3 px-4 pt-1 pb-3 xl:flex-row xl:items-center xl:gap-6">
-        <form action={action} className="flex flex-wrap items-center gap-2">
-          <span className="font-semibold text-foreground">{personaLabel}:</span>
-          {personas.map((p) => (
-            <button
-              key={p.value}
-              type="submit"
-              name={fieldName}
-              value={p.value}
-              aria-pressed={current === p.value}
-              className={cn(
-                "rounded-md border px-3 py-1.5 text-left transition-colors focus-visible:outline-2 focus-visible:outline-ring",
-                current === p.value
-                  ? "border-primary bg-surface text-foreground"
-                  : "border-border text-muted-foreground hover:bg-surface",
-              )}
-            >
-              <span className="font-semibold">{p.label}</span>
-              <span className="ml-1 text-xs">{p.detail}</span>
-            </button>
-          ))}
-        </form>
+        {personas.length > 1 ? (
+          <form action={action} className="flex flex-wrap items-center gap-2">
+            <span className="font-semibold text-foreground">{personaLabel}:</span>
+            {personas.map((p) => (
+              <button
+                key={p.value}
+                type="submit"
+                name={fieldName}
+                value={p.value}
+                aria-pressed={current === p.value}
+                className={cn(
+                  "rounded-md border px-3 py-1.5 text-left transition-colors focus-visible:outline-2 focus-visible:outline-ring",
+                  current === p.value
+                    ? "border-primary bg-surface text-foreground"
+                    : "border-border text-muted-foreground hover:bg-surface",
+                )}
+              >
+                <span className="font-semibold">{p.label}</span>
+                <span className="ml-1 text-xs">{p.detail}</span>
+              </button>
+            ))}
+          </form>
+        ) : null}
         <div className="flex flex-wrap items-center gap-2">
           <span className="font-semibold text-foreground">Tema:</span>
           <ThemeSwitcher />

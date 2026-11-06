@@ -57,3 +57,8 @@ export async function signOut() {
   jar.delete(DEMO_TEACHER_COOKIE);
   redirect("/ingresar");
 }
+
+/** Ingreso de demostración al portal de administración. */
+export async function enterAsAdmin() {
+  redirect("/admin");
+}

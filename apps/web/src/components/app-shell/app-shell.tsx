@@ -23,7 +23,7 @@ export function AppShell({ root, nav, user, demoBar, headerActions, children }: 
     <div className="min-h-dvh">
       {demoBar}
       <div className="mx-auto flex max-w-[90rem]">
-        <aside className="sticky top-0 hidden h-dvh w-64 shrink-0 flex-col gap-6 border-r border-border px-4 py-6 lg:flex">
+        <aside className="sticky top-0 hidden h-dvh w-64 shrink-0 flex-col gap-6 border-r border-border px-4 py-6 lg:flex print:hidden">
           <Link
             href={root}
             className="rounded-sm px-2 focus-visible:outline-2 focus-visible:outline-ring"
@@ -52,7 +52,7 @@ export function AppShell({ root, nav, user, demoBar, headerActions, children }: 
         </aside>
 
         <div className="flex min-w-0 flex-1 flex-col">
-          <header className="flex items-center justify-between gap-3 border-b border-border px-4 py-2 lg:justify-end lg:border-b-0 lg:px-8 lg:pt-4">
+          <header className="flex items-center justify-between gap-3 border-b border-border px-4 py-2 lg:justify-end lg:border-b-0 lg:px-8 lg:pt-4 print:hidden">
             <Link
               href={root}
               className="flex items-center gap-2 rounded-sm focus-visible:outline-2 focus-visible:outline-ring lg:hidden"
@@ -70,7 +70,7 @@ export function AppShell({ root, nav, user, demoBar, headerActions, children }: 
               </span>
             </div>
           </header>
-          <main id="contenido" className="flex-1 px-4 pt-4 pb-28 lg:px-8 lg:pb-12">
+          <main id="contenido" className="flex-1 px-4 pt-4 pb-28 lg:px-8 lg:pb-12 print:p-0">
             {children}
           </main>
         </div>
