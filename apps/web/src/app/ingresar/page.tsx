@@ -1,7 +1,15 @@
 import { Button, Card, CardContent, Input, Label } from "@rexaedu/ui";
-import { Backpack, BookOpenCheck, CircleHelp, LogIn, MessageCircle, Sparkles } from "lucide-react";
+import {
+  Backpack,
+  BookOpenCheck,
+  CircleHelp,
+  LogIn,
+  MessageCircle,
+  Presentation,
+  Sparkles,
+} from "lucide-react";
 import type { Metadata } from "next";
-import { enterAsStudent } from "@/app/actions";
+import { enterAsStudent, enterAsTeacher } from "@/app/actions";
 import { RexaeduLogo, RexaeduMark } from "@/components/brand/rexaedu-logo";
 import { SCHOOL } from "@/demo/queries";
 
@@ -100,8 +108,12 @@ export default function SignInPage() {
             </p>
           </details>
 
-          <div className="flex flex-col gap-3 rounded-lg border border-dashed border-border p-4">
+          <div
+            id="demo"
+            className="flex scroll-mt-4 flex-col gap-3 rounded-lg border border-dashed border-border p-4"
+          >
             <p className="text-sm font-semibold">Acceso rápido de demostración</p>
+            <p className="-mt-2 text-xs font-semibold text-muted-foreground uppercase">Alumnos</p>
             <form action={enterAsStudent} className="grid grid-cols-2 gap-2">
               <Button
                 type="submit"
@@ -128,6 +140,39 @@ export default function SignInPage() {
                   Sofía
                 </span>
                 <span className="text-xs font-normal text-muted-foreground">3.º Primaria</span>
+              </Button>
+            </form>
+            <p className="text-xs font-semibold text-muted-foreground uppercase">Profesores</p>
+            <form action={enterAsTeacher} className="grid grid-cols-2 gap-2">
+              <Button
+                type="submit"
+                name="profesor"
+                value="luis"
+                variant="secondary"
+                className="h-auto flex-col gap-0.5 py-2"
+              >
+                <span className="flex items-center gap-1.5">
+                  <Presentation aria-hidden />
+                  Prof. Luis
+                </span>
+                <span className="text-xs font-normal text-muted-foreground">
+                  Matemática · 4 secciones
+                </span>
+              </Button>
+              <Button
+                type="submit"
+                name="profesor"
+                value="ana"
+                variant="secondary"
+                className="h-auto flex-col gap-0.5 py-2"
+              >
+                <span className="flex items-center gap-1.5">
+                  <Presentation aria-hidden />
+                  Profa. Ana
+                </span>
+                <span className="text-xs font-normal text-muted-foreground">
+                  Titular 3.º Primaria
+                </span>
               </Button>
             </form>
           </div>

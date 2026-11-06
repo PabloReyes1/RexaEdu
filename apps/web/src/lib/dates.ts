@@ -69,6 +69,12 @@ export function relativeDue(d: Date, now = new Date()): string {
   return `Venció hace ${-diff} días`;
 }
 
+/** "AAAA-MM-DDTHH:MM" (hora del colegio) para <input type="datetime-local">. */
+export function toLocalInput(d: Date): string {
+  const local = new Date(d.getTime() + OFFSET_HOURS * 3_600_000).toISOString();
+  return local.slice(0, 16);
+}
+
 export function greeting(now = new Date()): string {
   const h = Number(fmt({ hour: "numeric", hour12: false }).format(now));
   return h < 12 ? "Buenos días" : h < 19 ? "Buenas tardes" : "Buenas noches";

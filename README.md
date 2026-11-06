@@ -37,7 +37,7 @@ Plataforma web **SaaS multi-colegio** para la gestión académica: portal para *
 
 ## Estado
 
-🎨 **Fase 0 – Diseño.** Documentación, sistema de diseño con temas por colegio y prototipo navegable del **portal del alumno** (colegio de demostración REXAEDU). Siguiente: portal del profesor. Ver [Roadmap](docs/12-roadmap.md).
+🎨 **Fase 0 – Diseño.** Documentación, sistema de diseño con temas por colegio y prototipos navegables del **portal del alumno** y del **portal del profesor** (colegio de demostración REXAEDU). Siguiente: portal de administración. Ver [Roadmap](docs/12-roadmap.md).
 
 ## Desarrollo
 
@@ -58,8 +58,9 @@ pnpm dev
 
 Abre http://localhost:3000. Páginas principales:
 
-- `/ingresar` — inicio de sesión; usa el acceso rápido para entrar como **Diego** (4.º Bachillerato) o **Sofía** (3.º Primaria).
+- `/ingresar` — inicio de sesión; usa el acceso rápido para entrar como alumno (**Diego**, 4.º Bachillerato; **Sofía**, 3.º Primaria) o como profesor (**Prof. Luis Herrera**, especialista de Matemática en 4 secciones; **Profa. Ana Pérez**, titular de 3.º Primaria A).
 - `/alumno` — portal del alumno: inicio, tareas, entrega, calificaciones y horario.
+- `/profesor` — portal del profesor: inicio, mis clases, libro de calificaciones, calificar entregas, nueva tarea (en varias secciones a la vez) y, para el titular, resumen de su sección.
 - `/sistema-diseno` — guía viva de componentes y temas.
 
 Los datos son de demostración (`apps/web/src/demo/`) y las fechas se calculan a partir del día actual, así que siempre hay tareas próximas.

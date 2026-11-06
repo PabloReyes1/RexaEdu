@@ -33,7 +33,7 @@ gantt
 - [x] Sistema de diseño base (tokens + componentes) y 3 temas de muestra, con validación automática de contraste.
 - [x] Logo y tema del colegio de demostración REXAEDU.
 - [x] Prototipo del portal del alumno: inicio de sesión, inicio (primaria y secundaria), tareas, detalle y entrega, calificaciones por materia y horario.
-- [ ] Prototipos del portal del profesor: inicio, crear tarea, calificar entregas, libro de calificaciones.
+- [x] Prototipo del portal del profesor: inicio, mis clases (se adapta a especialista o titular), crear tarea en varias clases, calificar entregas con penalización por atraso, libro de calificaciones editable con exportación a Excel y resumen de sección del titular.
 - [ ] Prototipos de administración: tablero, asistente de configuración, asignación docente.
 - [ ] Validar con 2–3 colegios reales (entrevistas a dirección, profesores y padres).
 - [ ] Escribir ADR-0001 a ADR-0004.

@@ -35,6 +35,7 @@ const entries: Entry[] = [
     title: "Portal del profesor",
     description: "Agenda, crear tareas, calificar y libro de calificaciones.",
     icon: Presentation,
+    href: "/ingresar#demo",
   },
   {
     title: "Portal de administración",

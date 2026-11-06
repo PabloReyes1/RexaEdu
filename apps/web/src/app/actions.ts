@@ -3,7 +3,8 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { studentIds, type StudentId } from "@/demo/queries";
-import { DEMO_STUDENT_COOKIE } from "@/lib/demo-session";
+import { teacherIds, type TeacherId } from "@/demo/teachers";
+import { DEMO_STUDENT_COOKIE, DEMO_TEACHER_COOKIE } from "@/lib/demo-session";
 
 async function setStudent(formData: FormData) {
   const id = formData.get("alumno");
@@ -29,7 +30,30 @@ export async function switchStudent(formData: FormData) {
   redirect(typeof back === "string" && back.startsWith("/alumno") ? back : "/alumno");
 }
 
+async function setTeacher(formData: FormData) {
+  const id = formData.get("profesor");
+  if (!teacherIds.includes(id as TeacherId)) throw new Error("Profesor de demostración no válido");
+  (await cookies()).set(DEMO_TEACHER_COOKIE, id as string, {
+    path: "/",
+    httpOnly: true,
+    sameSite: "lax",
+    maxAge: 60 * 60 * 24 * 30,
+  });
+}
+
+export async function enterAsTeacher(formData: FormData) {
+  await setTeacher(formData);
+  redirect("/profesor");
+}
+
+export async function switchTeacher(formData: FormData) {
+  await setTeacher(formData);
+  redirect("/profesor");
+}
+
 export async function signOut() {
-  (await cookies()).delete(DEMO_STUDENT_COOKIE);
+  const jar = await cookies();
+  jar.delete(DEMO_STUDENT_COOKIE);
+  jar.delete(DEMO_TEACHER_COOKIE);
   redirect("/ingresar");
 }
