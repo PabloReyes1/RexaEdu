@@ -1,6 +1,7 @@
 import { Alert } from "@rexaedu/ui";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { savePastContent } from "@/app/period-actions";
 import { ClassContentManager } from "@/components/content/class-content-manager";
 import { ContentViewer } from "@/components/content/content-viewer";
 import { TeacherPeriodNotice } from "@/components/period-selector";
@@ -33,7 +34,12 @@ export default async function TeacherClassContentPage({
         <ClassHeader w={w} cls={cls} tab="contenido" period={access.period} />
         <TeacherPeriodNotice access={access} />
         {access.canEdit ? (
-          <ClassContentManager key={access.period.id} initial={groups} publishTargets={[]} />
+          <ClassContentManager
+            key={access.period.id}
+            initial={groups}
+            publishTargets={[]}
+            onSave={savePastContent.bind(null, access.period.id, cls.id)}
+          />
         ) : (
           <ContentViewer key={access.period.id} groups={groups} />
         )}

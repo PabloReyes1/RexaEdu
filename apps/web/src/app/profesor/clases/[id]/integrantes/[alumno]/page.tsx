@@ -67,21 +67,23 @@ export default async function ClassStudentPage({
           <CardTitle>Bimestres anteriores</CardTitle>
         </CardHeader>
         <CardContent className="flex flex-wrap gap-6">
-          {CLOSED_PERIODS.map((p) => (
-            <Link
-              key={p.id}
-              href={`/profesor/clases/${cls.id}/libro${periodQuery(p)}`}
-              className="flex flex-col gap-1 rounded-md focus-visible:outline-2 focus-visible:outline-ring"
-            >
-              <span className="text-sm text-muted-foreground hover:underline">{p.name}</span>
-              <GradePill
-                score={rosterPastFinal(w, cls, p, st.id)}
-                passing={SCHOOL.passing}
-                decimals={0}
-                showLabel
-              />
-            </Link>
-          ))}
+          {CLOSED_PERIODS.map((p) => {
+            const final = rosterPastFinal(w, cls, p, st.id);
+            return (
+              <Link
+                key={p.id}
+                href={`/profesor/clases/${cls.id}/libro${periodQuery(p)}`}
+                className="flex flex-col gap-1 rounded-md focus-visible:outline-2 focus-visible:outline-ring"
+              >
+                <span className="text-sm text-muted-foreground hover:underline">{p.name}</span>
+                {final === null ? (
+                  <span className="text-sm text-muted-foreground">Sin nota</span>
+                ) : (
+                  <GradePill score={final} passing={SCHOOL.passing} decimals={0} showLabel />
+                )}
+              </Link>
+            );
+          })}
         </CardContent>
       </Card>
 

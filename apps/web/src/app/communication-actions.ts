@@ -236,7 +236,7 @@ export async function setPeriodGrant(fd: FormData) {
     const cls = w.classes.find((c) => c.id === id)!;
     return `${cls.subject.name} ${sectionOf(w, cls).grade} ${sectionOf(w, cls).name}`;
   });
-  store.grantLog.unshift({
+  store.periodLog.unshift({
     id: newId("log"),
     text: `${enable ? "Habilitó" : "Retiró"} la edición del ${period.name} a ${teacher.name}: ${labels.join(", ")}`,
     by: adminViewer.name,

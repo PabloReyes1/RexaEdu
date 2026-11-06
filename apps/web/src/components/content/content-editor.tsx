@@ -46,6 +46,8 @@ const emptyDraft: Draft = {
 };
 
 let created = 0;
+// Con la hora, para no repetir ids de lo guardado antes de recargar la página.
+const newResourceId = (prefix: string) => `${prefix}-${Date.now()}-${++created}`;
 const todayLabel = () =>
   new Intl.DateTimeFormat("es", { weekday: "short", day: "numeric", month: "numeric" })
     .format(new Date())
@@ -321,7 +323,7 @@ export function ContentEditor({
                 : [
                     ...g.resources,
                     {
-                      id: `nuevo-${++created}`,
+                      id: newResourceId("nuevo"),
                       publishedLabel: todayLabel(),
                       isNew: true,
                       ...data,
@@ -604,7 +606,7 @@ export function ContentEditor({
             if (!newGroup.trim()) return;
             update((gs) => [
               ...gs,
-              { id: `grupo-${++created}`, title: newGroup.trim(), resources: [] },
+              { id: newResourceId("grupo"), title: newGroup.trim(), resources: [] },
             ]);
             setFlash(`${Noun} «${newGroup.trim()}» creada.`);
             setNewGroup(null);

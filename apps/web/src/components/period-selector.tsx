@@ -58,8 +58,9 @@ export function TeacherPeriodNotice({ access }: { access: ClassPeriodAccess }) {
       title={`Edición habilitada en el ${access.period.name}`}
       className="mb-(--rx-gap)"
     >
-      {access.grant?.grantedBy} te dio permiso para modificar este bimestre finalizado.
-      Administración puede retirarlo en cualquier momento.
+      {access.grant?.grantedBy} te dio permiso para modificar este bimestre finalizado. Tus alumnos
+      verán lo que guardes y administración lo verá en la bitácora; puede retirar el permiso en
+      cualquier momento.
     </Alert>
   ) : (
     <Alert

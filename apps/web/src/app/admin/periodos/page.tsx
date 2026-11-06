@@ -59,7 +59,7 @@ function GrantForm({
 /** Administración decide quién puede modificar un bimestre finalizado. */
 export default function PeriodsPage() {
   const w = buildWorld();
-  const log = demoStore().grantLog;
+  const log = demoStore().periodLog;
 
   return (
     <>
@@ -169,12 +169,12 @@ export default function PeriodsPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Bitácora de permisos</CardTitle>
+            <CardTitle>Bitácora de bimestres</CardTitle>
           </CardHeader>
           <CardContent>
             {log.length === 0 ? (
               <Alert tone="info" title="Sin cambios">
-                Aún no se ha habilitado ni retirado ningún permiso.
+                Aún no hay permisos ni modificaciones en bimestres finalizados.
               </Alert>
             ) : (
               <ul className="flex flex-col gap-2 text-sm">

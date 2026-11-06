@@ -1,6 +1,7 @@
 import "server-only";
 
 import { cookies } from "next/headers";
+import { withPastEdits } from "@/demo/past-periods";
 import { getStudent, studentIds, type StudentId } from "@/demo/queries";
 import { getTeacher, teacherIds, type TeacherId } from "@/demo/teachers";
 import { adminViewer, studentViewer, teacherViewer, type Portal, type Viewer } from "@/demo/viewer";
@@ -16,7 +17,7 @@ export const DEMO_TEACHER_COOKIE = "rx-demo-profesor";
 export async function getCurrentStudent() {
   const value = (await cookies()).get(DEMO_STUDENT_COOKIE)?.value;
   const id: StudentId = studentIds.includes(value as StudentId) ? (value as StudentId) : "diego";
-  return getStudent(id);
+  return withPastEdits(getStudent(id));
 }
 
 /** Profesor de la sesión de demostración y el "mundo" del colegio que ve. */

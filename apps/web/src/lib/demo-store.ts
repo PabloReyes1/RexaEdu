@@ -1,19 +1,22 @@
 import "server-only";
 
+import type { SubmissionStatus } from "@rexaedu/ui";
 import {
   isVisibleTo,
   seedAnnouncements,
   sortAnnouncements,
   type FeedAnnouncement,
 } from "@/demo/announcements";
+import type { ContentGroup } from "@/demo/content";
 import { canViewForum, seedForums, type Forum } from "@/demo/forums";
 import { CLOSED_PERIODS, viewablePeriod, type Period, type PeriodId } from "@/demo/periods";
 import type { Viewer } from "@/demo/viewer";
 
 /**
- * Estado compartido entre portales mientras no exista la API: anuncios, foros y
- * permisos de edición de bimestres finalizados. Vive en la memoria del servidor
- * (se reinicia al reiniciarlo) y se reemplaza por la base de datos de docs/06.
+ * Estado compartido entre portales mientras no exista la API: anuncios, foros,
+ * permisos de edición de bimestres finalizados y lo que se modificó con ellos.
+ * Vive en la memoria del servidor (se reinicia al reiniciarlo) y se reemplaza por
+ * la base de datos de docs/06.
  */
 
 export interface PeriodGrant {
@@ -23,20 +26,34 @@ export interface PeriodGrant {
   at: Date;
 }
 
-export interface GrantEvent {
+export interface PeriodLogEvent {
   id: string;
   text: string;
   by: string;
   at: Date;
 }
 
+/** Nota modificada en un bimestre finalizado. */
+export interface PastGradeEdit {
+  status: SubmissionStatus;
+  points?: number;
+}
+
 interface DemoStore {
   announcements: FeedAnnouncement[];
   forums: Forum[];
   grants: PeriodGrant[];
-  grantLog: GrantEvent[];
+  periodLog: PeriodLogEvent[];
+  /** Por `pastGradeKey`. */
+  pastGrades: Map<string, PastGradeEdit>;
+  /** Por `pastContentKey`: reemplaza al material original de ese bimestre y clase. */
+  pastContent: Map<string, ContentGroup[]>;
   seq: number;
 }
+
+export const pastGradeKey = (studentId: string, activityId: string) => `${studentId}|${activityId}`;
+
+export const pastContentKey = (periodId: PeriodId, classKey: string) => `${periodId}|${classKey}`;
 
 // En `globalThis` para que las acciones y las páginas compartan la misma instancia.
 const holder = globalThis as typeof globalThis & { __rexaeduDemoStore?: DemoStore };
@@ -48,7 +65,9 @@ export function demoStore(): DemoStore {
       announcements: seedAnnouncements(now),
       forums: seedForums(now),
       grants: [],
-      grantLog: [],
+      periodLog: [],
+      pastGrades: new Map(),
+      pastContent: new Map(),
       seq: 0,
     };
   }

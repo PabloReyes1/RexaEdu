@@ -1,6 +1,6 @@
 # 16 · Bimestres finalizados, anuncios y foros
 
-Reglas que comparten los portales de alumno, profesor y administración. En el prototipo, los anuncios, los foros y los permisos viven en la memoria del servidor (`apps/web/src/lib/demo-store.ts`) y se reinician al reiniciarlo; se reemplazarán por las tablas de [docs/06](06-modelo-de-datos.md).
+Reglas que comparten los portales de alumno, profesor y administración. En el prototipo, los anuncios, los foros, los permisos y lo editado en bimestres finalizados viven en la memoria del servidor (`apps/web/src/lib/demo-store.ts`) y se reinician al reiniciarlo; se reemplazarán por las tablas de [docs/06](06-modelo-de-datos.md).
 
 ## 1. Bimestres finalizados
 
@@ -15,7 +15,9 @@ Reglas que comparten los portales de alumno, profesor y administración. En el p
 - Cada cambio de permiso queda en la bitácora con quién lo hizo y cuándo.
 - Esta regla reemplaza a la anterior, en la que solo el administrador podía cambiar notas tras el cierre.
 
-**Pendiente para producción:** motivo obligatorio y vencimiento del permiso, y registro de cada nota modificada. En el prototipo, las notas y el material editados se conservan solo mientras la página está abierta, igual que en el bimestre en curso.
+**Lo que se guarda:** las notas y el material editados con permiso quedan en el servidor. El alumno ve las notas de cada actividad, la nota final recalculada y el material actualizado; el profesor, los promedios de la clase. El permiso se comprueba en cada guardado, así que un cambio hecho desde una pestaña abierta después de retirarlo se rechaza. Lo ya guardado se conserva al retirar el permiso. Cada cambio de notas queda en la bitácora de administración con el valor anterior y el nuevo; los de material, sin detalle.
+
+**Pendiente para producción:** motivo obligatorio y vencimiento del permiso. En el prototipo, lo editado en el bimestre en curso todavía se conserva solo mientras la página está abierta.
 
 ## 2. Anuncios
 

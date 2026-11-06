@@ -12,7 +12,7 @@ import {
   type SubmissionStatus,
 } from "@rexaedu/ui";
 import { Check, Download, Search } from "lucide-react";
-import { useMemo, useState, type KeyboardEvent } from "react";
+import { useMemo, useState, useTransition, type KeyboardEvent } from "react";
 
 export interface GbStudent {
   id: string;
@@ -34,6 +34,11 @@ export interface GbCell {
   points?: number;
 }
 
+export interface GbChange extends GbCell {
+  studentId: string;
+  activityId: string;
+}
+
 export interface GradebookProps {
   fileName: string;
   students: GbStudent[];
@@ -43,6 +48,8 @@ export interface GradebookProps {
   passing: number;
   /** Bimestre finalizado sin permiso de edición: se puede ver y exportar. */
   readOnly?: boolean;
+  /** Bimestre finalizado con permiso: guarda en el servidor. Sin él, los cambios quedan en la página. */
+  onSave?: (changes: GbChange[]) => Promise<void>;
 }
 
 const k = (s: string, a: string) => `${s}|${a}`;
@@ -69,11 +76,14 @@ export function Gradebook({
   initial,
   passing,
   readOnly = false,
+  onSave,
 }: GradebookProps) {
   const [cells, setCells] = useState(initial);
   const [drafts, setDrafts] = useState<Record<string, string>>({});
   const [dirty, setDirty] = useState<Set<string>>(new Set());
   const [saved, setSaved] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const [saving, startSaving] = useTransition();
   const [query, setQuery] = useState("");
 
   const results = useMemo(() => {
@@ -121,6 +131,27 @@ export function Gradebook({
     });
     setDirty((d) => new Set(d).add(id));
     setSaved(false);
+    setFailed(false);
+  }
+
+  function save() {
+    const ids = [...dirty];
+    const changes = ids.map((id) => {
+      const [studentId = "", activityId = ""] = id.split("|");
+      return { studentId, activityId, ...cells[id]! };
+    });
+    // Lo que se edite mientras se guarda queda pendiente para el siguiente guardado.
+    setDirty(new Set());
+    setFailed(false);
+    startSaving(async () => {
+      try {
+        await onSave?.(changes);
+        setSaved(true);
+      } catch {
+        setDirty((d) => new Set([...d, ...ids]));
+        setFailed(true);
+      }
+    });
   }
 
   function move(e: KeyboardEvent<HTMLInputElement>, row: number, col: number) {
@@ -189,7 +220,11 @@ export function Gradebook({
         </div>
         <div className="ml-auto flex flex-wrap items-center gap-2">
           <span role="status" className="text-sm text-muted-foreground">
-            {saved ? (
+            {failed ? (
+              <span className="text-danger">
+                No se pudo guardar. Es posible que ya no tengas permiso de edición.
+              </span>
+            ) : saved ? (
               <span className="inline-flex items-center gap-1 text-success">
                 <Check className="size-4" aria-hidden />
                 Cambios guardados
@@ -203,14 +238,8 @@ export function Gradebook({
             Exportar a Excel
           </Button>
           {readOnly ? null : (
-            <Button
-              disabled={dirty.size === 0}
-              onClick={() => {
-                setDirty(new Set());
-                setSaved(true);
-              }}
-            >
-              Guardar
+            <Button disabled={dirty.size === 0 || saving} onClick={save}>
+              {saving ? "Guardando…" : "Guardar"}
             </Button>
           )}
         </div>

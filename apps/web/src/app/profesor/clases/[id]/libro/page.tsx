@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { savePastGrades } from "@/app/period-actions";
 import { TeacherPeriodNotice } from "@/components/period-selector";
 import { ClassHeader } from "@/components/teacher/class-header";
 import { Gradebook, type GbActivity, type GbCell } from "@/components/teacher/gradebook";
@@ -71,6 +72,11 @@ export default async function GradebookPage({
       <Gradebook
         key={`${access.period.id}-${access.canEdit}`}
         readOnly={!access.canEdit}
+        onSave={
+          access.closed && access.canEdit
+            ? savePastGrades.bind(null, access.period.id, cls.id)
+            : undefined
+        }
         fileName={`calificaciones-${cls.subject.name}-${section.grade}-${section.name}-${access.period.name}`
           .toLowerCase()
           .normalize("NFD")
