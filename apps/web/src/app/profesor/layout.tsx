@@ -30,6 +30,7 @@ export default async function TeacherLayout({ children }: { children: ReactNode 
       badgeLabel: "entregas por calificar",
     },
     { href: "/profesor/tareas/nueva", label: "Nueva tarea", shortLabel: "Nueva", icon: "create" },
+    { href: "/profesor/contenido", label: "Contenido", icon: "content", mobile: false },
   ];
   if (teacher.homeroomSectionId) {
     nav.push({

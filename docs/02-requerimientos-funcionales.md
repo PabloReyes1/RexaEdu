@@ -65,6 +65,7 @@ Los códigos (`RF-ADM-01`, etc.) se usarán como referencia en issues y commits.
 | RF-ADM-32 | Foros: crear categorías/espacios (por clase, por grado, generales, sala de profesores), moderar, fijar y cerrar hilos. | MVP |
 | RF-ADM-33 | Calendario escolar (feriados, eventos, exámenes generales) visible para todos. | MVP |
 | RF-ADM-34 | Confirmación de lectura de anuncios (quién lo vio). | PLUS |
+| RF-ADM-35 | **Contenido general**: crear apartados con carpetas de material dirigidos a todo el colegio, niveles, grados o secciones, para alumnos, profesores o ambos. | MVP |
 
 ### 2.5 Control académico
 | Código | Requerimiento | Prioridad |
@@ -90,7 +91,7 @@ Los códigos (`RF-ADM-01`, etc.) se usarán como referencia en issues y commits.
 | RF-PRO-07 | **Libro de calificaciones** (gradebook) tipo hoja: alumnos × actividades, edición rápida, promedios calculados en vivo, exportar a Excel. | MVP |
 | RF-PRO-08 | Marcar estados: entregado, tarde, no entregado, exonerado/excusado (no cuenta para el promedio). | MVP |
 | RF-PRO-09 | Configurar categorías y ponderaciones de su clase (si el administrador lo permite). | MVP |
-| RF-PRO-10 | **Notas / material de clase**: publicar apuntes, presentaciones, enlaces, videos organizados por unidad/tema. | MVP |
+| RF-PRO-10 | **Contenido de clase**: publicar documentos, enlaces, videos y notas organizados por unidad; marcar reforzamiento; ocultar como borrador; reordenar; publicar el mismo material en varias clases. Ver [Módulo de contenido](15-modulo-contenido.md). | MVP |
 | RF-PRO-11 | **Observaciones** sobre alumnos: tipo (académica, conducta, felicitación, salud), visibilidad, opción de notificar al encargado por WhatsApp. | MVP |
 | RF-PRO-12 | **Anuncios** a una o varias de sus clases (o a su sección si es titular). | MVP |
 | RF-PRO-13 | Profesor titular: resumen de su sección con todas las materias y alumnos en riesgo. | MVP |
@@ -118,6 +119,7 @@ Los códigos (`RF-ADM-01`, etc.) se usarán como referencia en issues y commits.
 | RF-ALU-10 | Notificaciones **dentro de la aplicación** (y push web si el alumno instala la PWA): nueva tarea, tarea calificada, recordatorio de entrega. Sin correo para alumnos. | MVP |
 | RF-ALU-11 | Simulador "¿qué nota necesito?" para alcanzar el mínimo o una meta. | PLUS |
 | RF-ALU-12 | Descargar boleta del periodo. | MVP |
+| RF-ALU-13 | **Contenido**: ver y descargar el material de sus clases y de los apartados generales que le correspondan; buscar y filtrar por tipo; ver el material nuevo en su inicio. Solo lectura. | MVP |
 
 ---
 

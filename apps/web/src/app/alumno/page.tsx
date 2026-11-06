@@ -19,6 +19,7 @@ import {
 import { ArrowRight, Award, CalendarCheck, ClipboardList, PartyPopper, Send } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { NewMaterial } from "@/components/content/new-material";
 import { AnnouncementList, PageHeader, TodayClasses } from "@/components/student/blocks";
 import { ClassIcon } from "@/components/student/subject";
 import { kindLabel, TaskRow } from "@/components/student/task-row";
@@ -223,6 +224,7 @@ function SecondaryHome({ s }: { s: Student }) {
 
         <div className="flex flex-col gap-(--rx-gap)">
           <TodayClasses student={s} now={now} />
+          <NewMaterial student={s} />
           <Card id="anuncios" className="scroll-mt-4">
             <CardHeader>
               <CardTitle>Anuncios</CardTitle>
@@ -349,6 +351,7 @@ function PrimaryHome({ s }: { s: Student }) {
           </CardContent>
         </Card>
         <TodayClasses student={s} now={now} />
+        <NewMaterial student={s} limit={3} />
       </div>
     </>
   );

@@ -33,6 +33,7 @@ export default async function StudentLayout({ children }: { children: ReactNode 
           shortLabel: "Notas",
           icon: "grades",
         },
+        { href: "/alumno/contenido", label: "Contenido", shortLabel: "Material", icon: "content" },
         { href: "/alumno/horario", label: "Horario", icon: "calendar" },
       ]}
       user={{

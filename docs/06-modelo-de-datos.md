@@ -216,7 +216,7 @@ erDiagram
     CALIFICACION ||--o{ HISTORIAL_CALIFICACION : audita
     PERFIL_ALUMNO ||--o{ RESUMEN_CALIFICACION : tiene
     CLASE ||--o{ RESUMEN_CALIFICACION : resume
-    CLASE ||--o{ MATERIAL : publica
+    CLASE ||--o{ UNIDAD_CONTENIDO : organiza
     PERFIL_ALUMNO ||--o{ OBSERVACION : recibe
 
     CATEGORIA_EVALUACION {
@@ -287,13 +287,11 @@ erDiagram
         jsonb desglose_categorias
         timestamptz recalculado_en
     }
-    MATERIAL {
+    UNIDAD_CONTENIDO {
         uuid id PK
         uuid clase_id FK
-        string unidad
         string titulo
-        text contenido
-        timestamptz publicado_en
+        int orden
     }
     ADJUNTO {
         uuid id PK
@@ -398,6 +396,8 @@ erDiagram
         timestamptz leida_en
     }
 ```
+
+> El detalle del módulo de contenido (unidades, recursos y apartados generales con audiencia) está en [15 · Módulo de contenido](15-modulo-contenido.md).
 
 ## 2. Tablas para fases futuras (reservadas)
 

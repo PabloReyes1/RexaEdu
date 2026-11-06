@@ -34,6 +34,8 @@
 | POST | `/admin/imports` · GET `/admin/imports/:id` | Importación Excel/CSV y su resultado |
 | CRUD | `/admin/announcements` | Anuncios |
 | CRUD | `/admin/forums` | Foros |
+| CRUD | `/admin/content/spaces` | Apartados de contenido general y su audiencia |
+| CRUD | `/admin/content/spaces/:id/units` · `/units/:id/resources` | Carpetas y material de un apartado |
 | POST | `/admin/periods/:id/close` | Cerrar periodo |
 | GET | `/admin/report-cards?periodId=&sectionId=` | Boletas PDF |
 | GET | `/admin/reports/at-risk`, `/admin/reports/grading-progress` | Reportes |
@@ -52,7 +54,9 @@
 | POST | `/teacher/submissions/:id/return` | Devolver para corrección |
 | GET | `/teacher/classes/:classId/gradebook?periodId=` | Libro de calificaciones |
 | GET | `/teacher/classes/:classId/gradebook/export` | Exportar Excel |
-| CRUD | `/teacher/classes/:classId/materials` | Notas / material |
+| CRUD | `/teacher/classes/:classId/content/units` | Unidades de contenido de la clase |
+| CRUD | `/teacher/content/units/:unitId/resources` | Material (acepta `alsoInClassIds[]` para publicar en varias clases) |
+| PATCH | `/teacher/content/resources/:id/order` · `/visibility` | Reordenar · ocultar o mostrar |
 | CRUD | `/teacher/observations` | Observaciones |
 | CRUD | `/teacher/announcements` | Anuncios a sus clases |
 | GET | `/teacher/sections/:id/overview` | Resumen de sección (titular) |
@@ -71,6 +75,9 @@
 | GET | `/student/grades/classes/:id` | Desglose de una clase |
 | GET | `/student/schedule` | Horario |
 | GET | `/student/report-cards` | Boletas |
+| GET | `/student/content` | Clases con material y apartados generales visibles |
+| GET | `/student/content/classes/:id` · `/student/content/spaces/:id` | Material de una clase o apartado (solo visible) |
+| GET | `/content/resources/:id/download-url` | URL firmada de descarga (valida acceso) |
 
 ## Comunes
 | Método | Ruta | Descripción |

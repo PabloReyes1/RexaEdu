@@ -31,6 +31,13 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           shortLabel: "Avisos",
           icon: "megaphone",
         },
+        {
+          href: "/admin/contenido",
+          label: "Contenido general",
+          shortLabel: "Contenido",
+          icon: "content",
+          mobile: false,
+        },
         { href: "/admin/configuracion", label: "Configuración", icon: "settings", mobile: false },
       ]}
       user={{ name: "Lic. Marta López", detail: "Coordinación académica" }}

@@ -6,6 +6,7 @@ import {
   CalendarDays,
   ClipboardCheck,
   ClipboardList,
+  FolderOpen,
   House,
   LayoutDashboard,
   LibraryBig,
@@ -35,6 +36,7 @@ const icons = {
   assign: UserCog,
   megaphone: Megaphone,
   settings: Settings,
+  content: FolderOpen,
 } satisfies Record<string, LucideIcon>;
 
 export type NavIcon = keyof typeof icons;

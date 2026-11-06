@@ -14,12 +14,13 @@ export function ClassHeader({
 }: {
   w: World;
   cls: TeachingClass;
-  tab: "actividades" | "libro";
+  tab: "actividades" | "libro" | "contenido";
 }) {
   const avg = classAverage(w, cls);
   const tabs = [
     { id: "actividades", label: "Actividades", href: `/profesor/clases/${cls.id}` },
     { id: "libro", label: "Libro de calificaciones", href: `/profesor/clases/${cls.id}/libro` },
+    { id: "contenido", label: "Contenido", href: `/profesor/clases/${cls.id}/contenido` },
   ];
   return (
     <div className="mb-6 flex flex-col gap-4">
@@ -57,7 +58,7 @@ export function ClassHeader({
         </div>
       </div>
       <nav aria-label="Secciones de la clase" className="border-b border-border">
-        <ul className="-mb-px flex gap-4">
+        <ul className="-mb-px flex gap-4 overflow-x-auto">
           {tabs.map((t) => (
             <li key={t.id}>
               <Link
