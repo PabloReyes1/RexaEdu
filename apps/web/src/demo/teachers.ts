@@ -154,6 +154,7 @@ export function studentsAtRisk(w: World, t: Teacher) {
   const byStudent = new Map<
     string,
     {
+      studentId: string;
       name: string;
       cls: TeachingClass;
       label: string;
@@ -171,6 +172,7 @@ export function studentsAtRisk(w: World, t: Teacher) {
       const count = (prev?.count ?? 0) + 1;
       if (!prev || r.current < prev.grade) {
         byStudent.set(st.id, {
+          studentId: st.id,
           name: `${st.firstName} ${st.lastName}`,
           cls,
           label: classLabel(w, cls),

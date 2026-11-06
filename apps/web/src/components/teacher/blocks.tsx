@@ -1,15 +1,17 @@
 import { average } from "@rexaedu/grading";
 import {
   Badge,
+  buttonVariants,
   Card,
   CardContent,
+  CardFooter,
   CardHeader,
   CardTitle,
   cn,
   GradePill,
   Progress,
 } from "@rexaedu/ui";
-import { CalendarClock, ChevronRight, Coffee, UsersRound } from "lucide-react";
+import { ArrowRight, CalendarClock, ChevronRight, Coffee, UsersRound } from "lucide-react";
 import Link from "next/link";
 import { ClassIcon } from "@/components/student/subject";
 import { nextSchoolDay, SCHOOL } from "@/demo/queries";
@@ -224,6 +226,12 @@ export function TeacherAgenda({ w, t }: { w: World; t: Teacher }) {
           })}
         </ol>
       </CardContent>
+      <CardFooter>
+        <Link href="/profesor/horario" className={buttonVariants({ variant: "ghost", size: "sm" })}>
+          Ver horario de la semana
+          <ArrowRight aria-hidden />
+        </Link>
+      </CardFooter>
     </Card>
   );
 }

@@ -35,6 +35,7 @@ Plataforma web **SaaS multi-colegio** para la gestión académica: portal para *
 | 13  | [Convenciones de desarrollo](docs/13-convenciones-desarrollo.md)    | Estructura del repo, ramas, commits, calidad                          |
 | 14  | [Diseño UI/UX y personalización](docs/14-diseno-ui-ux.md)           | Temas por colegio, principios de diseño, personas, mapa de pantallas  |
 | 15  | [Módulo de contenido](docs/15-modulo-contenido.md)                  | Material de clase y contenido general por audiencia                   |
+| 16  | [Bimestres, anuncios y foros](docs/16-bimestres-anuncios-foros.md)  | Bimestres finalizados, permisos de edición, anuncios y foros          |
 
 ## Estado
 
@@ -60,9 +61,9 @@ pnpm dev
 Abre http://localhost:3000. Páginas principales:
 
 - `/ingresar` — inicio de sesión; usa el acceso rápido para entrar como alumno (**Diego**, 4.º Bachillerato; **Sofía**, 3.º Primaria) como profesor (**Prof. Luis Herrera**, especialista de Matemática en 4 secciones; **Profa. Ana Pérez**, titular de 3.º Primaria A) o como administración (**Lic. Marta López**).
-- `/alumno` — portal del alumno: inicio, tareas, entrega, calificaciones, contenido y horario.
-- `/profesor` — portal del profesor: inicio, mis clases, libro de calificaciones, calificar entregas, nueva tarea (en varias secciones a la vez), contenido por unidades y, para el titular, resumen de su sección.
-- `/admin` — administración: tablero, estructura académica, asignación docente (por sección o por materia), usuarios, importación desde Excel, tarjetas de acceso imprimibles, anuncios con vista previa de WhatsApp, foros, contenido general por audiencia y configuración.
+- `/alumno` — portal del alumno: inicio, mis cursos (tareas, notas, contenido y foro), tareas, entrega, calificaciones, horario, anuncios, foros y contenido.
+- `/profesor` — portal del profesor: inicio, mis clases, libro de calificaciones, calificar entregas, nueva tarea (en varias secciones a la vez), contenido por unidades, integrantes, horario, anuncios, foros y, para el titular, resumen de su sección.
+- `/admin` — administración: tablero, estructura académica, asignación docente (por sección o por materia), usuarios, importación desde Excel, tarjetas de acceso imprimibles, anuncios con vista previa de WhatsApp, foros con moderación, permisos de edición de bimestres, contenido general por audiencia y configuración.
 - `/sistema-diseno` — guía viva de componentes y temas.
 
 Los datos son de demostración (`apps/web/src/demo/`) y las fechas se calculan a partir del día actual, así que siempre hay tareas próximas.

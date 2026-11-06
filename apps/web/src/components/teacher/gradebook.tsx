@@ -41,6 +41,8 @@ export interface GradebookProps {
   categories: Category[];
   initial: Record<string, GbCell>;
   passing: number;
+  /** Bimestre finalizado sin permiso de edición: se puede ver y exportar. */
+  readOnly?: boolean;
 }
 
 const k = (s: string, a: string) => `${s}|${a}`;
@@ -66,6 +68,7 @@ export function Gradebook({
   categories,
   initial,
   passing,
+  readOnly = false,
 }: GradebookProps) {
   const [cells, setCells] = useState(initial);
   const [drafts, setDrafts] = useState<Record<string, string>>({});
@@ -199,15 +202,17 @@ export function Gradebook({
             <Download aria-hidden />
             Exportar a Excel
           </Button>
-          <Button
-            disabled={dirty.size === 0}
-            onClick={() => {
-              setDirty(new Set());
-              setSaved(true);
-            }}
-          >
-            Guardar
-          </Button>
+          {readOnly ? null : (
+            <Button
+              disabled={dirty.size === 0}
+              onClick={() => {
+                setDirty(new Set());
+                setSaved(true);
+              }}
+            >
+              Guardar
+            </Button>
+          )}
         </div>
       </div>
 
@@ -299,6 +304,7 @@ export function Gradebook({
                             aria-invalid={invalid || undefined}
                             inputMode="decimal"
                             value={value}
+                            readOnly={readOnly}
                             placeholder={toGrade ? "Por calificar" : a.future ? "—" : ""}
                             onChange={(e) => setDrafts((d) => ({ ...d, [id]: e.target.value }))}
                             onBlur={(e) => {
@@ -357,10 +363,15 @@ export function Gradebook({
           <span className="size-3 rounded-sm bg-surface-muted" aria-hidden /> EX · exonerada (no
           cuenta)
         </li>
-        <li className="flex items-center gap-1.5">
-          <span className="size-3 rounded-sm ring-2 ring-accent" aria-hidden /> Cambio sin guardar
-        </li>
-        <li>Enter o ↓ pasa al siguiente alumno.</li>
+        {readOnly ? null : (
+          <>
+            <li className="flex items-center gap-1.5">
+              <span className="size-3 rounded-sm ring-2 ring-accent" aria-hidden /> Cambio sin
+              guardar
+            </li>
+            <li>Enter o ↓ pasa al siguiente alumno.</li>
+          </>
+        )}
       </ul>
     </div>
   );

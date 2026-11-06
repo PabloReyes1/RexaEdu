@@ -14,13 +14,14 @@ import {
   gradeTone,
   gradeToneMeta,
   Progress,
-  StatCard,
 } from "@rexaedu/ui";
 import { ArrowRight, Award, CalendarCheck, ClipboardList, PartyPopper, Send } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { AnnouncementFeed } from "@/components/communication/announcement-views";
 import { NewMaterial } from "@/components/content/new-material";
-import { AnnouncementList, PageHeader, TodayClasses } from "@/components/student/blocks";
+import { StatLink } from "@/components/stat-link";
+import { PageHeader, TodayClasses } from "@/components/student/blocks";
 import { ClassIcon } from "@/components/student/subject";
 import { kindLabel, TaskRow } from "@/components/student/task-row";
 import {
@@ -32,7 +33,7 @@ import {
   SCHOOL,
   submittedActivities,
 } from "@/demo/queries";
-import type { Activity, Student } from "@/demo/types";
+import type { Announcement, Activity, Student } from "@/demo/types";
 import {
   capitalize,
   dayDiff,
@@ -41,7 +42,8 @@ import {
   formatShortDay,
   greeting,
 } from "@/lib/dates";
-import { getCurrentStudent } from "@/lib/demo-session";
+import { getCurrentStudent, getViewer } from "@/lib/demo-session";
+import { announcementsFor } from "@/lib/demo-store";
 
 export const metadata: Metadata = { title: "Inicio" };
 
@@ -57,7 +59,23 @@ function dueGroup(a: Activity): string {
 
 export default async function StudentHome() {
   const student = await getCurrentStudent();
-  return student.level === "primaria" ? <PrimaryHome s={student} /> : <SecondaryHome s={student} />;
+  const announcements = announcementsFor(await getViewer("alumno")).slice(0, 3);
+  return student.level === "primaria" ? (
+    <PrimaryHome s={student} announcements={announcements} />
+  ) : (
+    <SecondaryHome s={student} announcements={announcements} />
+  );
+}
+
+function AllAnnouncementsLink({ label }: { label: string }) {
+  return (
+    <CardFooter>
+      <Link href="/alumno/anuncios" className={buttonVariants({ variant: "ghost", size: "sm" })}>
+        {label}
+        <ArrowRight aria-hidden />
+      </Link>
+    </CardFooter>
+  );
 }
 
 function OverdueAlert({ s }: { s: Student }) {
@@ -88,7 +106,7 @@ function OverdueAlert({ s }: { s: Student }) {
 
 /* ───────────────────────── Secundaria ───────────────────────── */
 
-function SecondaryHome({ s }: { s: Student }) {
+function SecondaryHome({ s, announcements }: { s: Student; announcements: Announcement[] }) {
   const now = new Date();
   const pending = pendingActivities(s, now);
   const submitted = submittedActivities(s);
@@ -111,7 +129,8 @@ function SecondaryHome({ s }: { s: Student }) {
       <OverdueAlert s={s} />
 
       <div className="mb-6 grid grid-cols-1 gap-(--rx-gap) sm:grid-cols-3">
-        <StatCard
+        <StatLink
+          href="/alumno/calificaciones"
           label="Promedio general"
           icon={Award}
           value={avg === null ? "—" : formatGrade(roundGrade(avg))}
@@ -121,13 +140,15 @@ function SecondaryHome({ s }: { s: Student }) {
               : `${gradeToneMeta[gradeTone(avg, { passing: SCHOOL.passing })].label} · nota mínima ${SCHOOL.passing}`
           }
         />
-        <StatCard
+        <StatLink
+          href="/alumno/tareas?estado=pendientes"
           label="Por entregar"
           icon={ClipboardList}
           value={pending.length}
           hint={pending[0] ? `La próxima: ${formatDue(pending[0].dueAt)}` : "¡Estás al día!"}
         />
-        <StatCard
+        <StatLink
+          href="/alumno/tareas?estado=entregadas"
           label="Esperando calificación"
           icon={Send}
           value={submitted.length}
@@ -229,9 +250,10 @@ function SecondaryHome({ s }: { s: Student }) {
             <CardHeader>
               <CardTitle>Anuncios</CardTitle>
             </CardHeader>
-            <CardContent>
-              <AnnouncementList items={s.announcements} />
+            <CardContent className="p-1 sm:p-2">
+              <AnnouncementFeed items={announcements} basePath="/alumno/anuncios" />
             </CardContent>
+            <AllAnnouncementsLink label="Ver todos los anuncios" />
           </Card>
         </div>
       </div>
@@ -241,7 +263,7 @@ function SecondaryHome({ s }: { s: Student }) {
 
 /* ───────────────────────── Primaria ───────────────────────── */
 
-function PrimaryHome({ s }: { s: Student }) {
+function PrimaryHome({ s, announcements }: { s: Student; announcements: Announcement[] }) {
   const now = new Date();
   const pending = pendingActivities(s, now);
   const results = classResults(s);
@@ -325,7 +347,7 @@ function PrimaryHome({ s }: { s: Student }) {
           {results.map((r) => (
             <li key={r.info.id}>
               <Link
-                href={`/alumno/calificaciones/${r.info.id}`}
+                href={`/alumno/cursos/${r.info.id}`}
                 className="flex h-full flex-col items-center gap-2 rounded-lg border-(length:--rx-card-border) border-border bg-surface p-4 text-center shadow-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-ring"
               >
                 <ClassIcon info={r.info} className="size-14 [&_svg]:size-7" />
@@ -346,9 +368,10 @@ function PrimaryHome({ s }: { s: Student }) {
           <CardHeader>
             <CardTitle>Avisos</CardTitle>
           </CardHeader>
-          <CardContent>
-            <AnnouncementList items={s.announcements} large />
+          <CardContent className="p-1 sm:p-2">
+            <AnnouncementFeed items={announcements} basePath="/alumno/anuncios" large />
           </CardContent>
+          <AllAnnouncementsLink label="Ver todos los avisos" />
         </Card>
         <TodayClasses student={s} now={now} />
         <NewMaterial student={s} limit={3} />

@@ -17,6 +17,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           label: "Estructura académica",
           shortLabel: "Estructura",
           icon: "structure",
+          mobile: false,
         },
         {
           href: "/admin/asignaciones",
@@ -31,6 +32,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           shortLabel: "Avisos",
           icon: "megaphone",
         },
+        { href: "/admin/periodos", label: "Bimestres", icon: "periods", mobile: false },
         {
           href: "/admin/contenido",
           label: "Contenido general",

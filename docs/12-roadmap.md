@@ -36,6 +36,7 @@ gantt
 - [x] Prototipo del portal del profesor: inicio, mis clases (se adapta a especialista o titular), crear tarea en varias clases, calificar entregas con penalización por atraso, libro de calificaciones editable con exportación a Excel y resumen de sección del titular.
 - [x] Módulo de contenido: material por clase administrado por el profesor y apartados generales por audiencia ([15](15-modulo-contenido.md)).
 - [x] Prototipo de administración: tablero, estructura académica, asignación docente con detección de clases sin profesor y sobrecarga, usuarios, importación CSV con validación, tarjetas de acceso, anuncios (con vista previa de WhatsApp), foros con moderación y configuración inicial.
+- [x] Inicios interactivos, Mis cursos, anuncios y foros en todos los portales, integrantes de clase y bimestres finalizados en solo consulta con permisos de edición ([16](16-bimestres-anuncios-foros.md)).
 - [ ] Validar con 2–3 colegios reales (entrevistas a dirección, profesores y padres).
 - [ ] Escribir ADR-0001 a ADR-0004.
 - [ ] Crear cuenta de Meta Business y número de prueba de WhatsApp.

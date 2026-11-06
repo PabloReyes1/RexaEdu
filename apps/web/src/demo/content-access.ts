@@ -15,6 +15,12 @@ const studentSection: Record<Student["id"], { sectionId: string; level: string }
   sofia: { sectionId: "3a", level: "pri" },
 };
 
+export const studentSectionOf = (s: Student) => studentSection[s.id];
+
+/** Clase del mundo de demostración (materia × sección) que corresponde al alumno. */
+export const studentClassKey = (s: Student, classId: string) =>
+  `${studentSection[s.id].sectionId}-${classId}`;
+
 export function studentClassContent(s: Student, classId: string): ContentGroup[] {
   const info = s.classes.find((c) => c.id === classId);
   if (!info) return [];

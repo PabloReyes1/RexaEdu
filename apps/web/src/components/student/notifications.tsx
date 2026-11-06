@@ -32,7 +32,12 @@ function notices(s: Student): Notice[] {
   }
   const ann = s.announcements[0];
   if (ann)
-    list.push({ icon: Megaphone, text: ann.title, meta: ann.author, href: "/alumno#anuncios" });
+    list.push({
+      icon: Megaphone,
+      text: ann.title,
+      meta: ann.author,
+      href: `/alumno/anuncios/${ann.id}`,
+    });
   return list;
 }
 

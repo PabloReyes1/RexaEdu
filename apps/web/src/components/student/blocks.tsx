@@ -1,9 +1,10 @@
 import { Badge, Card, CardContent, CardHeader, CardTitle, cn } from "@rexaedu/ui";
-import { Megaphone, Pin } from "lucide-react";
+import { ChevronRight } from "lucide-react";
+import Link from "next/link";
 import type { ReactNode } from "react";
 import { classesOn, nextSchoolDay } from "@/demo/queries";
-import type { Announcement, Student } from "@/demo/types";
-import { at, formatLongDay, formatShortDay } from "@/lib/dates";
+import type { Student } from "@/demo/types";
+import { at, formatLongDay } from "@/lib/dates";
 import { ClassTag } from "./subject";
 
 export function PageHeader({
@@ -59,60 +60,32 @@ export function TodayClasses({ student, now = new Date() }: { student: Student; 
             const current = nowMin >= toMinutes(b.start) && nowMin < toMinutes(b.end);
             const done = nowMin >= toMinutes(b.end);
             return (
-              <li
-                key={`${b.start}-${i}`}
-                className={cn(
-                  "flex items-center gap-3 rounded-md px-2 py-2",
-                  current && "bg-primary-soft",
-                  done && "opacity-60",
-                )}
-              >
-                <span className="w-12 shrink-0 text-sm text-muted-foreground tabular-nums">
-                  {b.start}
-                </span>
-                <span className="flex min-w-0 flex-1 flex-col">
-                  <ClassTag info={b.info} />
-                  <span className="truncate text-xs text-muted-foreground">
-                    {b.room} · {b.info.teacher}
+              <li key={`${b.start}-${i}`}>
+                <Link
+                  href={`/alumno/cursos/${b.classId}`}
+                  className={cn(
+                    "flex items-center gap-3 rounded-md px-2 py-2 hover:bg-surface-muted focus-visible:outline-2 focus-visible:outline-ring",
+                    current && "bg-primary-soft",
+                    done && "opacity-60 hover:opacity-100",
+                  )}
+                >
+                  <span className="w-12 shrink-0 text-sm text-muted-foreground tabular-nums">
+                    {b.start}
                   </span>
-                </span>
-                {current ? <Badge tone="primary">Ahora</Badge> : null}
+                  <span className="flex min-w-0 flex-1 flex-col">
+                    <ClassTag info={b.info} />
+                    <span className="truncate text-xs text-muted-foreground">
+                      {b.room} · {b.info.teacher}
+                    </span>
+                  </span>
+                  {current ? <Badge tone="primary">Ahora</Badge> : null}
+                  <ChevronRight className="size-4 shrink-0 text-muted-foreground" aria-hidden />
+                </Link>
               </li>
             );
           })}
         </ol>
       </CardContent>
     </Card>
-  );
-}
-
-export function AnnouncementList({
-  items,
-  large = false,
-}: {
-  items: Announcement[];
-  large?: boolean;
-}) {
-  return (
-    <ul className="flex flex-col gap-4">
-      {items.map((a) => (
-        <li key={a.id} className="flex gap-3">
-          <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-accent text-accent-foreground">
-            {a.pinned ? (
-              <Pin className="size-4" aria-hidden />
-            ) : (
-              <Megaphone className="size-4" aria-hidden />
-            )}
-          </span>
-          <div className="flex min-w-0 flex-col gap-1">
-            <p className={cn("font-semibold", large && "text-lg")}>{a.title}</p>
-            <p className={cn("text-muted-foreground", large ? "text-base" : "text-sm")}>{a.body}</p>
-            <p className="text-xs text-muted-foreground">
-              {a.author} · {a.role} · {formatShortDay(a.at)}
-            </p>
-          </div>
-        </li>
-      ))}
-    </ul>
   );
 }

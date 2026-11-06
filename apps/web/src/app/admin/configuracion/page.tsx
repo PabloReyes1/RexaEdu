@@ -16,8 +16,8 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { DemoForm } from "@/components/admin/demo-form";
 import { PageHeader } from "@/components/student/blocks";
-import { getStudent, SCHOOL } from "@/demo/queries";
-import { formatShortDay } from "@/lib/dates";
+import { periodRange, PERIODS } from "@/demo/periods";
+import { SCHOOL } from "@/demo/queries";
 
 export const metadata: Metadata = { title: "Configuración" };
 
@@ -81,18 +81,17 @@ function Text({
 }
 
 export default function SettingsPage() {
-  const closes = getStudent("diego").currentPeriod.closesAt;
-  const periods = [
-    { name: "Bimestre 1", range: "12 ene – 27 mar", state: "Cerrado", tone: "neutral" as const },
-    { name: "Bimestre 2", range: "6 abr – 19 jun", state: "Cerrado", tone: "neutral" as const },
-    {
-      name: "Bimestre 3",
-      range: `6 jul – ${formatShortDay(closes)}`,
-      state: "Abierto",
-      tone: "success" as const,
-    },
-    { name: "Bimestre 4", range: "23 nov – 18 dic", state: "Planificado", tone: "info" as const },
-  ];
+  const periodState = {
+    cerrado: { label: "Finalizado", tone: "neutral" },
+    abierto: { label: "En curso", tone: "success" },
+    planificado: { label: "Planificado", tone: "info" },
+  } as const;
+  const periods = PERIODS.map((p) => ({
+    name: p.name,
+    range: periodRange(p),
+    state: periodState[p.state].label,
+    tone: periodState[p.state].tone,
+  }));
   const done = setup.filter((s) => s.done).length;
 
   return (
@@ -187,7 +186,12 @@ export default function SettingsPage() {
           <Card id="periodos" className="scroll-mt-4">
             <CardHeader>
               <CardTitle>Ciclo 2026 y periodos</CardTitle>
-              <CardDescription>4 bimestres · cada uno vale 25 % de la nota final</CardDescription>
+              <CardDescription>
+                4 bimestres · cada uno vale 25 % de la nota final ·{" "}
+                <Link href="/admin/periodos" className="font-semibold text-primary hover:underline">
+                  Administrar permisos de edición
+                </Link>
+              </CardDescription>
             </CardHeader>
             <CardContent className="overflow-x-auto">
               <table className="w-full text-sm">

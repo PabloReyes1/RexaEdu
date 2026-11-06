@@ -48,13 +48,18 @@ export interface ClassResult extends PeriodResult {
   activities: Activity[];
 }
 
+export function classResultFrom(info: ClassInfo, list: Activity[]): ClassResult {
+  const activities = [...list].sort((x, y) => y.dueAt.getTime() - x.dueAt.getTime());
+  return { info, activities, ...weightedCategoryGrade(activities.map(toGraded), info.categories) };
+}
+
 export function classResult(s: Student, classId: string): ClassResult | undefined {
   const info = classById(s, classId);
   if (!info) return undefined;
-  const activities = s.activities
-    .filter((a) => a.classId === classId)
-    .sort((x, y) => y.dueAt.getTime() - x.dueAt.getTime());
-  return { info, activities, ...weightedCategoryGrade(activities.map(toGraded), info.categories) };
+  return classResultFrom(
+    info,
+    s.activities.filter((a) => a.classId === classId),
+  );
 }
 
 export function classResults(s: Student): ClassResult[] {

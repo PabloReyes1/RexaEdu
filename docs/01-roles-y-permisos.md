@@ -48,6 +48,7 @@ Leyenda: ✅ completo · 👁 solo lectura · 🔸 limitado a su alcance · — 
 | Anuncios | ✅ (a colegios) | ✅ colegio/nivel/grado/sección | ✅ sus clases | ✅ su sección | 👁 | 👁 (WhatsApp) |
 | Foros | — | ✅ crear y moderar | ✅ en sus clases | ✅ | ✅ participar | — (Plus) |
 | Cierre de periodo / boletas | — | ✅ | 🔸 enviar a revisión | 🔸 | 👁 boleta | 👁 boleta |
+| Bimestres finalizados | — | ✅ habilita la edición por clase | 👁 y descarga; editar solo con permiso | 👁 y descarga; editar solo con permiso | 👁 y descarga | — |
 | Asistencia *(fase 2)* | — | ✅ | ✅🔸 | ✅🔸 | 👁 propio | 👁 hijos |
 | Pagos *(fase 3)* | 👁 | ✅ | — | — | 👁 | ✅ pagar |
 | Reportes y estadísticas | ✅ globales | ✅ colegio | 🔸 sus clases | 🔸 su sección | 👁 propio | 👁 hijos |
@@ -57,6 +58,6 @@ Leyenda: ✅ completo · 👁 solo lectura · 🔸 limitado a su alcance · — 
 
 1. **Aislamiento entre colegios:** ningún usuario de un colegio puede ver datos de otro (garantizado a nivel de base de datos, ver [Arquitectura](05-arquitectura.md)).
 2. **Un profesor solo opera sobre clases asignadas** en el ciclo activo. Si se le retira la asignación, conserva solo lectura del histórico (configurable).
-3. **Cambios de calificación** después del cierre de periodo solo los hace el Administrador y quedan en bitácora con motivo.
+3. **Cambios después del cierre de periodo:** un bimestre finalizado es de solo consulta y descarga. Solo el Administrador puede habilitar la edición a un profesor, por clase, y el permiso queda en bitácora ([docs/16](16-bimestres-anuncios-foros.md)).
 4. **Observaciones** tienen visibilidad: `privada` (solo docentes/administración), `alumno`, `encargado` o `alumno+encargado`.
 5. **Encargados** solo ven alumnos vinculados explícitamente por administración, y solo si su vínculo tiene la bandera `puede_consultar = true` (útil en casos de custodia).

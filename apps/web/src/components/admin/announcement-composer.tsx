@@ -16,7 +16,9 @@ import {
   Textarea,
 } from "@rexaedu/ui";
 import { CheckCheck, Megaphone, MessageCircle, Send } from "lucide-react";
-import { useState } from "react";
+import { useState, useTransition } from "react";
+import type { AdminAnnouncementInput } from "@/app/communication-actions";
+import type { AnnouncementScope } from "@/demo/announcements";
 
 interface SectionInfo {
   id: string;
@@ -44,12 +46,14 @@ export function AnnouncementComposer({
   sections,
   staffCount,
   optInRate,
+  onPublish,
 }: {
   schoolName: string;
   levels: { id: string; name: string }[];
   sections: SectionInfo[];
   staffCount: number;
   optInRate: number;
+  onPublish: (input: AdminAnnouncementInput) => Promise<void>;
 }) {
   const [title, setTitle] = useState("Día de la familia");
   const [body, setBody] = useState(
@@ -61,6 +65,7 @@ export function AnnouncementComposer({
   const [pinned, setPinned] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [publishing, startPublishing] = useTransition();
 
   const grades = [...new Set(sections.map((s) => s.grade))];
   const scope =
@@ -86,7 +91,24 @@ export function AnnouncementComposer({
     if (!title.trim() || !body.trim()) return setError("Escribe un título y un mensaje.");
     if (needsTarget && !target) return setError("Elige a quién va dirigido.");
     setError(null);
-    setSent(true);
+    const scope: AnnouncementScope =
+      audience === "nivel" || audience === "grado" || audience === "seccion"
+        ? { kind: audience, target }
+        : { kind: audience };
+    startPublishing(async () => {
+      try {
+        await onPublish({
+          title,
+          body,
+          scope,
+          audienceLabel: audienceLabel ?? "Todo el colegio",
+          pinned,
+        });
+        setSent(true);
+      } catch {
+        setError("No se pudo publicar el anuncio. Inténtalo de nuevo.");
+      }
+    });
   }
 
   const audienceLabel =
@@ -221,7 +243,7 @@ export function AnnouncementComposer({
                 </p>
               ) : null}
               <div className="flex flex-wrap items-center gap-3">
-                <Button type="submit">
+                <Button type="submit" disabled={publishing}>
                   <Send aria-hidden />
                   Publicar anuncio
                 </Button>

@@ -1,12 +1,16 @@
-import { cn } from "@rexaedu/ui";
+import { Card, CardContent, CardHeader, CardTitle, cn } from "@rexaedu/ui";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { publishAdminAnnouncement } from "@/app/communication-actions";
 import { AnnouncementComposer } from "@/components/admin/announcement-composer";
 import { ForumModeration } from "@/components/admin/forum-moderation";
+import { AnnouncementFeed } from "@/components/communication/announcement-views";
 import { PageHeader } from "@/components/student/blocks";
 import { allSections, levels, staff } from "@/demo/admin";
 import { SCHOOL } from "@/demo/queries";
+import { adminViewer } from "@/demo/viewer";
 import { buildWorld } from "@/demo/world";
+import { announcementsFor, forumsFor } from "@/lib/demo-store";
 
 export const metadata: Metadata = { title: "Anuncios y foros" };
 
@@ -46,80 +50,35 @@ export default async function CommunicationPage({
         </ul>
       </nav>
       {tab === "anuncios" ? (
-        <AnnouncementComposer
-          schoolName={SCHOOL.name}
-          levels={levels.map(({ id, name }) => ({ id, name }))}
-          sections={sections.map(({ id, levelId, grade, label, students }) => ({
-            id,
-            levelId,
-            grade,
-            label,
-            students,
-          }))}
-          staffCount={staff.length}
-          optInRate={0.86}
-        />
+        <div className="flex flex-col gap-(--rx-gap)">
+          <AnnouncementComposer
+            schoolName={SCHOOL.name}
+            levels={levels.map(({ id, name }) => ({ id, name }))}
+            sections={sections.map(({ id, levelId, grade, label, students }) => ({
+              id,
+              levelId,
+              grade,
+              label,
+              students,
+            }))}
+            staffCount={staff.length}
+            optInRate={0.86}
+            onPublish={publishAdminAnnouncement}
+          />
+          <Card>
+            <CardHeader>
+              <CardTitle>Anuncios publicados</CardTitle>
+            </CardHeader>
+            <CardContent className="p-2 sm:p-3">
+              <AnnouncementFeed
+                items={announcementsFor(adminViewer)}
+                basePath="/admin/comunicacion/anuncios"
+              />
+            </CardContent>
+          </Card>
+        </div>
       ) : (
-        <ForumModeration
-          forums={[
-            {
-              id: "f1",
-              title: "Sala de profesores",
-              scope: "Solo profesores",
-              threads: 18,
-              lastActivity: "hoy",
-              moderated: false,
-            },
-            {
-              id: "f2",
-              title: "Feria de ciencias 2026",
-              scope: "4.º y 5.º Bachillerato",
-              threads: 9,
-              lastActivity: "ayer",
-              moderated: true,
-            },
-            {
-              id: "f3",
-              title: "Dudas de Matemática · 4.º B",
-              scope: "Clase",
-              threads: 24,
-              lastActivity: "hoy",
-              moderated: false,
-            },
-            {
-              id: "f4",
-              title: "Club de lectura",
-              scope: "Primaria",
-              threads: 6,
-              lastActivity: "hace 3 días",
-              moderated: true,
-            },
-            {
-              id: "f5",
-              title: "Avisos generales",
-              scope: "Todo el colegio",
-              threads: 4,
-              lastActivity: "hace 1 semana",
-              moderated: true,
-            },
-          ]}
-          flagged={[
-            {
-              id: "m1",
-              forum: "Feria de ciencias 2026",
-              author: "Kevin Ortiz (5.º A)",
-              text: "¿Alguien tiene las respuestas del examen de química? Las comparto por mensaje.",
-              reason: "Reportado por un profesor",
-            },
-            {
-              id: "m2",
-              forum: "Club de lectura",
-              author: "Zoe Ramos (4.º Primaria B)",
-              text: "Me encantó el capítulo 3, ¿cuándo leemos el siguiente libro?",
-              reason: "Foro moderado: requiere aprobación",
-            },
-          ]}
-        />
+        <ForumModeration forums={forumsFor(adminViewer)} />
       )}
     </>
   );

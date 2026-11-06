@@ -30,6 +30,9 @@ export default async function TeacherLayout({ children }: { children: ReactNode 
       badgeLabel: "entregas por calificar",
     },
     { href: "/profesor/tareas/nueva", label: "Nueva tarea", shortLabel: "Nueva", icon: "create" },
+    { href: "/profesor/horario", label: "Horario", icon: "calendar", mobile: false },
+    { href: "/profesor/anuncios", label: "Anuncios", icon: "megaphone", mobile: false },
+    { href: "/profesor/foros", label: "Foros", icon: "forum", mobile: false },
     { href: "/profesor/contenido", label: "Contenido", icon: "content", mobile: false },
   ];
   if (teacher.homeroomSectionId) {
@@ -38,6 +41,7 @@ export default async function TeacherLayout({ children }: { children: ReactNode 
       label: "Mi sección",
       shortLabel: "Sección",
       icon: "section",
+      mobile: false,
     });
   }
 

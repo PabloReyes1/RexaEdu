@@ -61,7 +61,7 @@ function hash(s: string): number {
   return h >>> 0;
 }
 
-function rand(seed: string): number {
+export function rand(seed: string): number {
   let t = (hash(seed) + 0x6d2b79f5) >>> 0;
   t = Math.imul(t ^ (t >>> 15), t | 1);
   t ^= t + Math.imul(t ^ (t >>> 7), t | 61);

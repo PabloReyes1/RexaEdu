@@ -1,4 +1,4 @@
-import { roundGrade } from "@rexaedu/grading";
+import { average, roundGrade } from "@rexaedu/grading";
 import {
   Badge,
   Card,
@@ -19,6 +19,7 @@ import Link from "next/link";
 import { PageHeader } from "@/components/student/blocks";
 import { PeriodChart } from "@/components/student/period-chart";
 import { ClassIcon } from "@/components/student/subject";
+import { periodQuery, VIEWABLE_PERIODS } from "@/demo/periods";
 import { classResults, generalAverage, periodAverages, SCHOOL } from "@/demo/queries";
 import { getCurrentStudent } from "@/lib/demo-session";
 
@@ -78,9 +79,103 @@ export default async function GradesPage() {
         </Card>
       </div>
 
+      <Card className="mb-(--rx-gap)">
+        <CardHeader>
+          <CardTitle>Notas generales</CardTitle>
+          <CardDescription>
+            Tus cursos en todos los bimestres. Toca una nota para ver el detalle de ese bimestre.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="overflow-x-auto">
+          <table className="w-full min-w-[34rem] text-sm">
+            <caption className="sr-only">Notas por curso y bimestre</caption>
+            <thead className="border-b border-border text-muted-foreground">
+              <tr>
+                <th scope="col" className="py-2 pr-3 text-left font-semibold">
+                  Curso
+                </th>
+                {VIEWABLE_PERIODS.map((p) => (
+                  <th key={p.id} scope="col" className="px-2 py-2 text-center font-semibold">
+                    {p.name}
+                    {p.state === "abierto" ? (
+                      <span className="block text-xs font-normal">En curso</span>
+                    ) : null}
+                  </th>
+                ))}
+                <th scope="col" className="py-2 pl-2 text-center font-semibold">
+                  Promedio
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-border">
+              {results.map((r) => {
+                const grades = VIEWABLE_PERIODS.map((p) =>
+                  p.state === "abierto"
+                    ? r.current
+                    : (s.pastPeriods.find((x) => x.name === p.name)?.finals[r.info.id] ?? null),
+                );
+                const yearAvg = average(grades);
+                return (
+                  <tr key={r.info.id}>
+                    <th scope="row" className="py-2 pr-3 text-left font-semibold">
+                      <Link
+                        href={`/alumno/cursos/${r.info.id}`}
+                        className="rounded-sm hover:underline focus-visible:outline-2 focus-visible:outline-ring"
+                      >
+                        {r.info.name}
+                      </Link>
+                    </th>
+                    {VIEWABLE_PERIODS.map((p, i) => {
+                      const grade = grades[i] ?? null;
+                      const q = periodQuery(p);
+                      return (
+                        <td key={p.id} className="px-2 py-2 text-center">
+                          <Link
+                            href={`/alumno/cursos/${r.info.id}${q ? `${q}&` : "?"}apartado=notas`}
+                            aria-label={`${r.info.name}, ${p.name}`}
+                            className="inline-flex rounded-full hover:opacity-80 focus-visible:outline-2 focus-visible:outline-ring"
+                          >
+                            {grade === null ? (
+                              <Badge>—</Badge>
+                            ) : (
+                              <GradePill score={grade} passing={SCHOOL.passing} decimals={0} />
+                            )}
+                          </Link>
+                        </td>
+                      );
+                    })}
+                    <td className="py-2 pl-2 text-center font-semibold tabular-nums">
+                      {yearAvg === null ? "—" : formatGrade(roundGrade(yearAvg))}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+            <tfoot className="border-t-2 border-border">
+              <tr>
+                <th scope="row" className="py-2 pr-3 text-left font-semibold">
+                  Promedio general
+                </th>
+                {periodAverages(s).map((p) => (
+                  <td key={p.name} className="px-2 py-2 text-center font-semibold tabular-nums">
+                    {p.value === null ? "—" : formatGrade(roundGrade(p.value))}
+                  </td>
+                ))}
+                <td className="py-2 pl-2 text-center font-semibold tabular-nums">
+                  {(() => {
+                    const all = average(periodAverages(s).map((p) => p.value));
+                    return all === null ? "—" : formatGrade(roundGrade(all));
+                  })()}
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </CardContent>
+      </Card>
+
       <Card>
         <CardHeader>
-          <CardTitle>Por materia</CardTitle>
+          <CardTitle>Por materia · {s.currentPeriod.name}</CardTitle>
         </CardHeader>
         <CardContent className="p-2 sm:p-3">
           <ul className="flex flex-col divide-y divide-border">

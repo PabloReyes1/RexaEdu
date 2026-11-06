@@ -71,7 +71,7 @@ Los códigos (`RF-ADM-01`, etc.) se usarán como referencia en issues y commits.
 | Código | Requerimiento | Prioridad |
 |---|---|---|
 | RF-ADM-40 | Tablero: avance de calificación por profesor (cuántas actividades calificadas vs. pendientes). | MVP |
-| RF-ADM-41 | Cierre de periodo: bloquear edición de notas, generar notas finales del periodo. | MVP |
+| RF-ADM-41 | Cierre de periodo: bloquear edición de notas, generar notas finales del periodo. Solo administración puede habilitar la edición a un profesor, por clase ([docs/16](16-bimestres-anuncios-foros.md)). | MVP |
 | RF-ADM-42 | Boleta / tarjeta de calificaciones en PDF con formato configurable. | MVP |
 | RF-ADM-43 | Reportes: alumnos en riesgo (promedio bajo el mínimo), cuadro de honor, rendimiento por materia/sección. | MVP |
 | RF-ADM-44 | Bitácora de cambios de calificaciones. | MVP |
@@ -83,7 +83,7 @@ Los códigos (`RF-ADM-01`, etc.) se usarán como referencia en issues y commits.
 | Código | Requerimiento | Prioridad |
 |---|---|---|
 | RF-PRO-01 | Inicio: mis clases (agrupadas por sección o por materia según el modelo), agenda del día según horario, tareas por calificar. | MVP |
-| RF-PRO-02 | Vista de clase: alumnos, actividades, libro de calificaciones, material, anuncios, foro. | MVP |
+| RF-PRO-02 | Vista de clase: integrantes, actividades, libro de calificaciones, material y foro, con consulta de bimestres anteriores. | MVP |
 | RF-PRO-03 | **Crear actividad/tarea**: título, instrucciones (texto enriquecido), adjuntos y enlaces, categoría (tarea, examen...), punteo máximo, fecha de publicación y de entrega, periodo, si acepta entregas en línea, si acepta entregas tardías (y penalización). | MVP |
 | RF-PRO-04 | Publicar la misma actividad en **varias clases a la vez** (útil para el profesor especialista con varias secciones del mismo grado). | MVP |
 | RF-PRO-05 | Actividades sin entrega en línea (examen escrito, participación) solo para registrar nota. | MVP |
@@ -109,7 +109,7 @@ Los códigos (`RF-ADM-01`, etc.) se usarán como referencia en issues y commits.
 |---|---|---|
 | RF-ALU-01 | Inicio: tareas próximas (ordenadas por fecha de entrega), tareas vencidas sin entregar, anuncios recientes, clases de hoy según horario. | MVP |
 | RF-ALU-02 | Calendario/agenda con tareas y eventos (vista semanal y mensual). | MVP |
-| RF-ALU-03 | Mis clases: material, actividades, anuncios y foro de cada clase. | MVP |
+| RF-ALU-03 | Mis cursos: tareas, notas, contenido y foro de cada curso, con consulta y descarga de bimestres anteriores. | MVP |
 | RF-ALU-04 | **Entregar tarea**: subir uno o varios archivos, texto o enlace; reenviar mientras no esté calificada y no haya vencido (configurable). Comprobante de entrega con fecha/hora. | MVP |
 | RF-ALU-05 | **Ver calificaciones**: por actividad, con retroalimentación del profesor. | MVP |
 | RF-ALU-06 | **Promedio por clase** (por periodo y acumulado) y **promedio general**, con desglose por categoría y gráfica de evolución. | MVP |

@@ -80,16 +80,17 @@ export default async function SchedulePage() {
                           Recreo {prev.end}–{b.start}
                         </span>
                       ) : null}
-                      <div
-                        className="rounded-md border-l-4 bg-surface-muted px-2.5 py-1.5"
+                      <Link
+                        href={`/alumno/cursos/${b.classId}`}
+                        className="block rounded-md border-l-4 bg-surface-muted px-2.5 py-1.5 transition-colors hover:bg-primary-soft focus-visible:outline-2 focus-visible:outline-ring"
                         style={{ borderLeftColor: `var(--rx-subject-${b.info.color})` }}
                       >
-                        <p className="text-xs text-muted-foreground tabular-nums">
+                        <span className="block text-xs text-muted-foreground tabular-nums">
                           {b.start}–{b.end}
-                        </p>
+                        </span>
                         <ClassTag info={b.info} className="text-sm" />
-                        <p className="text-xs text-muted-foreground">{b.room}</p>
-                      </div>
+                        <span className="block text-xs text-muted-foreground">{b.room}</span>
+                      </Link>
                     </li>
                   );
                 })}

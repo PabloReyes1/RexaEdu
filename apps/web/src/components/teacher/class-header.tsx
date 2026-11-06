@@ -1,27 +1,42 @@
 import { buttonVariants, cn, GradePill, Badge } from "@rexaedu/ui";
 import { ArrowLeft, Plus } from "lucide-react";
 import Link from "next/link";
+import { PeriodSelector } from "@/components/period-selector";
 import { ClassIcon } from "@/components/student/subject";
+import { pastClassAverage } from "@/demo/past-periods";
+import { CURRENT_PERIOD, periodQuery, type Period } from "@/demo/periods";
 import { SCHOOL } from "@/demo/queries";
 import { classLabel, sectionOf, type TeachingClass, type World } from "@/demo/world";
 import { classAverage } from "./blocks";
 
-/** Encabezado de una clase con pestañas Actividades / Libro de calificaciones. */
+type ClassTab = "actividades" | "libro" | "contenido" | "integrantes" | "foro";
+
+/** Encabezado de una clase con sus pestañas y el bimestre que se está viendo. */
 export function ClassHeader({
   w,
   cls,
   tab,
+  period,
 }: {
   w: World;
   cls: TeachingClass;
-  tab: "actividades" | "libro" | "contenido";
+  tab: ClassTab;
+  /** Solo en las pestañas que cambian según el bimestre. */
+  period?: Period;
 }) {
-  const avg = classAverage(w, cls);
-  const tabs = [
-    { id: "actividades", label: "Actividades", href: `/profesor/clases/${cls.id}` },
-    { id: "libro", label: "Libro de calificaciones", href: `/profesor/clases/${cls.id}/libro` },
-    { id: "contenido", label: "Contenido", href: `/profesor/clases/${cls.id}/contenido` },
+  const shown = period ?? CURRENT_PERIOD;
+  const closed = shown.state === "cerrado";
+  const avg = closed ? pastClassAverage(w, cls, shown) : classAverage(w, cls);
+  const base = `/profesor/clases/${cls.id}`;
+  const q = periodQuery(shown);
+  const tabs: { id: ClassTab; label: string; href: string }[] = [
+    { id: "actividades", label: "Actividades", href: `${base}${q}` },
+    { id: "libro", label: "Libro de calificaciones", href: `${base}/libro${q}` },
+    { id: "contenido", label: "Contenido", href: `${base}/contenido${q}` },
+    { id: "integrantes", label: "Integrantes", href: `${base}/integrantes` },
+    { id: "foro", label: "Foro", href: `${base}/foro` },
   ];
+  const tabPath = tab === "actividades" ? base : `${base}/${tab}`;
   return (
     <div className="mb-6 flex flex-col gap-4">
       <Link
@@ -38,7 +53,7 @@ export function ClassHeader({
             {cls.subject.name} · {classLabel(w, cls)}
           </h1>
           <p className="text-muted-foreground">
-            {sectionOf(w, cls).roster.length} alumnos · Bimestre 3 ·{" "}
+            {sectionOf(w, cls).roster.length} alumnos · {shown.name} ·{" "}
             {cls.subject.categories.map((c) => `${c.name} ${c.weight} %`).join(" · ")}
           </p>
         </div>
@@ -48,15 +63,18 @@ export function ClassHeader({
           ) : (
             <GradePill score={avg} passing={SCHOOL.passing} showLabel />
           )}
-          <Link
-            href={`/profesor/tareas/nueva?clase=${cls.id}`}
-            className={buttonVariants({ variant: "secondary", size: "sm" })}
-          >
-            <Plus aria-hidden />
-            Nueva tarea
-          </Link>
+          {!closed ? (
+            <Link
+              href={`/profesor/tareas/nueva?clase=${cls.id}`}
+              className={buttonVariants({ variant: "secondary", size: "sm" })}
+            >
+              <Plus aria-hidden />
+              Nueva tarea
+            </Link>
+          ) : null}
         </div>
       </div>
+      {period ? <PeriodSelector selected={period} basePath={tabPath} /> : null}
       <nav aria-label="Secciones de la clase" className="border-b border-border">
         <ul className="-mb-px flex gap-4 overflow-x-auto">
           {tabs.map((t) => (
@@ -65,7 +83,7 @@ export function ClassHeader({
                 href={t.href}
                 aria-current={tab === t.id ? "page" : undefined}
                 className={cn(
-                  "inline-flex border-b-2 px-1 pb-2 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-ring",
+                  "inline-flex border-b-2 px-1 pb-2 text-sm font-semibold whitespace-nowrap focus-visible:outline-2 focus-visible:outline-ring",
                   tab === t.id
                     ? "border-primary text-primary"
                     : "border-transparent text-muted-foreground hover:text-foreground",

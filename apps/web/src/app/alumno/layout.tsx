@@ -20,6 +20,7 @@ export default async function StudentLayout({ children }: { children: ReactNode 
       root="/alumno"
       nav={[
         { href: "/alumno", label: "Inicio", icon: "home" },
+        { href: "/alumno/cursos", label: "Mis cursos", shortLabel: "Cursos", icon: "classes" },
         {
           href: "/alumno/tareas",
           label: "Tareas",
@@ -33,8 +34,10 @@ export default async function StudentLayout({ children }: { children: ReactNode 
           shortLabel: "Notas",
           icon: "grades",
         },
-        { href: "/alumno/contenido", label: "Contenido", shortLabel: "Material", icon: "content" },
-        { href: "/alumno/horario", label: "Horario", icon: "calendar" },
+        { href: "/alumno/horario", label: "Horario", icon: "calendar", mobile: false },
+        { href: "/alumno/anuncios", label: "Anuncios", icon: "megaphone", mobile: false },
+        { href: "/alumno/foros", label: "Foros", icon: "forum", mobile: false },
+        { href: "/alumno/contenido", label: "Contenido", icon: "content", mobile: false },
       ]}
       user={{
         name: `${student.firstName} ${student.lastName}`,
