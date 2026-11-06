@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 236 48" role="img" aria-label="REXAEDU">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#5b21b6"/>
+    </linearGradient>
+  </defs>
+  <rect width="48" height="48" rx="12" fill="url(#g)"/>
+  <path d="M16 35V13h9.5a7 7 0 0 1 0 14H16M24.5 27 32 35" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M37 5.5q.9 4.6 5.5 5.5-4.6.9-5.5 5.5-.9-4.6-5.5-5.5 4.6-.9 5.5-5.5Z" fill="#fbbf24"/>
+  <text x="60" y="34" font-family="Plus Jakarta Sans, Inter, Arial, sans-serif" font-size="27" letter-spacing="-0.5" fill="#6d28d9"><tspan font-weight="800">REXA</tspan><tspan font-weight="500">EDU</tspan></text>
+</svg>

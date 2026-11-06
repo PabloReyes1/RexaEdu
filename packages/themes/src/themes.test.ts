@@ -66,6 +66,6 @@ describe("themeToCss", () => {
   });
 
   it("getTheme cae al tema por defecto con un id desconocido", () => {
-    expect(getTheme("no-existe").id).toBe("moderno");
+    expect(getTheme("no-existe").id).toBe("rexaedu");
   });
 });

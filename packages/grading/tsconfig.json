@@ -1,0 +1,4 @@
+{
+  "extends": "@rexaedu/tsconfig/base.json",
+  "include": ["src"]
+}

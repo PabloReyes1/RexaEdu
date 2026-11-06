@@ -37,7 +37,7 @@ Plataforma web **SaaS multi-colegio** para la gestión académica: portal para *
 
 ## Estado
 
-🎨 **Fase 0 – Diseño.** Documentación lista; sistema de diseño con temas por colegio en marcha. Siguiente: prototipos navegables de las pantallas MVP. Ver [Roadmap](docs/12-roadmap.md).
+🎨 **Fase 0 – Diseño.** Documentación, sistema de diseño con temas por colegio y prototipo navegable del **portal del alumno** (colegio de demostración REXAEDU). Siguiente: portal del profesor. Ver [Roadmap](docs/12-roadmap.md).
 
 ## Desarrollo
 
@@ -56,7 +56,13 @@ pnpm install
 pnpm dev
 ```
 
-Abre http://localhost:3000 y la guía del sistema de diseño en http://localhost:3000/sistema-diseno.
+Abre http://localhost:3000. Páginas principales:
+
+- `/ingresar` — inicio de sesión; usa el acceso rápido para entrar como **Diego** (4.º Bachillerato) o **Sofía** (3.º Primaria).
+- `/alumno` — portal del alumno: inicio, tareas, entrega, calificaciones y horario.
+- `/sistema-diseno` — guía viva de componentes y temas.
+
+Los datos son de demostración (`apps/web/src/demo/`) y las fechas se calculan a partir del día actual, así que siempre hay tareas próximas.
 
 ### Comandos
 
@@ -76,6 +82,7 @@ apps/
   web/              Portal web (Next.js): alumnos, profesores, administración
 packages/
   themes/           Temas por colegio: tokens de diseño y validación de contraste
+  grading/          Cálculo de promedios (categorías ponderadas y puntos acumulados)
   ui/               Componentes compartidos (sistema de diseño)
   tsconfig/         Configuración de TypeScript compartida
 docs/               Documentación funcional y técnica

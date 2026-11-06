@@ -29,6 +29,7 @@ const entries: Entry[] = [
     title: "Portal del alumno",
     description: "Inicio, tareas, entregas y calificaciones (modo primaria y secundaria).",
     icon: Backpack,
+    href: "/ingresar",
   },
   {
     title: "Portal del profesor",

@@ -1,4 +1,11 @@
-import { Fredoka, Inter, Merriweather, Nunito, Source_Sans_3 } from "next/font/google";
+import {
+  Fredoka,
+  Inter,
+  Merriweather,
+  Nunito,
+  Plus_Jakarta_Sans,
+  Source_Sans_3,
+} from "next/font/google";
 
 /*
  * Fuentes disponibles para los temas. Cada una expone la variable CSS que
@@ -21,7 +28,12 @@ const sourceSans = Source_Sans_3({
 });
 const nunito = Nunito({ subsets: ["latin"], variable: "--font-nunito", display: "swap" });
 const fredoka = Fredoka({ subsets: ["latin"], variable: "--font-fredoka", display: "swap" });
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-jakarta",
+  display: "swap",
+});
 
-export const fontVariables = [inter, merriweather, sourceSans, nunito, fredoka]
+export const fontVariables = [jakarta, inter, merriweather, sourceSans, nunito, fredoka]
   .map((f) => f.variable)
   .join(" ");

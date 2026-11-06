@@ -6,7 +6,7 @@
  */
 
 /** Fuentes disponibles. Cada una se carga con next/font en la app web. */
-export type FontId = "inter" | "merriweather" | "source-sans" | "nunito" | "fredoka";
+export type FontId = "inter" | "merriweather" | "source-sans" | "nunito" | "fredoka" | "jakarta";
 
 /** Colores semánticos. Los componentes nunca usan colores fijos, solo estos. */
 export interface ColorTokens {

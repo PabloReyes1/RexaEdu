@@ -7,6 +7,7 @@ export const fontVariable = {
   "source-sans": "--font-source-sans",
   nunito: "--font-nunito",
   fredoka: "--font-fredoka",
+  jakarta: "--font-jakarta",
 } as const;
 
 const shadows: Record<ShadowStyle, string> = {

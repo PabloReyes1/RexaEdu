@@ -31,7 +31,10 @@ gantt
 - [x] Lineamientos de diseño UI/UX y personalización por colegio ([14](14-diseno-ui-ux.md)).
 - [x] Entorno de desarrollo del frontend: monorepo pnpm + Turborepo, Next.js, Tailwind, ESLint, Prettier, Vitest y CI en GitHub Actions.
 - [x] Sistema de diseño base (tokens + componentes) y 3 temas de muestra, con validación automática de contraste.
-- [ ] Prototipos navegables de las pantallas MVP: inicio alumno, libro de calificaciones, crear tarea, asistente de asignación, configuración inicial.
+- [x] Logo y tema del colegio de demostración REXAEDU.
+- [x] Prototipo del portal del alumno: inicio de sesión, inicio (primaria y secundaria), tareas, detalle y entrega, calificaciones por materia y horario.
+- [ ] Prototipos del portal del profesor: inicio, crear tarea, calificar entregas, libro de calificaciones.
+- [ ] Prototipos de administración: tablero, asistente de configuración, asignación docente.
 - [ ] Validar con 2–3 colegios reales (entrevistas a dirección, profesores y padres).
 - [ ] Escribir ADR-0001 a ADR-0004.
 - [ ] Crear cuenta de Meta Business y número de prueba de WhatsApp.
