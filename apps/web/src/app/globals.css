@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+/* Componentes compartidos: Tailwind debe escanear sus clases. */
+@source "../../../../packages/ui/src";
+
+/* Modo oscuro por clase (lo controla el selector de tema). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Puente entre los tokens del tema (--rx-*, generados por @rexaedu/themes)
+ * y las utilidades de Tailwind. Los componentes solo usan estos nombres
+ * semánticos: bg-surface, text-muted-foreground, bg-primary, etc.
+ */
+@theme inline {
+  --color-background: var(--rx-background);
+  --color-surface: var(--rx-surface);
+  --color-surface-muted: var(--rx-surface-muted);
+  --color-border: var(--rx-border);
+  --color-foreground: var(--rx-text);
+  --color-muted-foreground: var(--rx-text-muted);
+
+  --color-primary: var(--rx-primary);
+  --color-primary-foreground: var(--rx-primary-foreground);
+  --color-primary-soft: var(--rx-primary-soft);
+  --color-primary-soft-foreground: var(--rx-primary-soft-foreground);
+  --color-accent: var(--rx-accent);
+  --color-accent-foreground: var(--rx-accent-foreground);
+
+  --color-success: var(--rx-success);
+  --color-success-soft: var(--rx-success-soft);
+  --color-warning: var(--rx-warning);
+  --color-warning-soft: var(--rx-warning-soft);
+  --color-danger: var(--rx-danger);
+  --color-danger-soft: var(--rx-danger-soft);
+  --color-info: var(--rx-info);
+  --color-info-soft: var(--rx-info-soft);
+  --color-on-status: var(--rx-on-status);
+  --color-ring: var(--rx-ring);
+
+  --font-sans: var(--rx-font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--rx-font-heading), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: var(--rx-radius-sm);
+  --radius-md: var(--rx-radius-md);
+  --radius-lg: var(--rx-radius-lg);
+  --radius-xl: var(--rx-radius-xl);
+
+  --shadow-card: var(--rx-shadow);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+}

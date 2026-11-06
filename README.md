@@ -8,36 +8,88 @@ Plataforma web **SaaS multi-colegio** para la gestión académica: portal para *
 
 ## Propuesta de valor
 
-| Para | Valor |
-|---|---|
-| **Dirección / Administración** | Control de la estructura académica, docentes, anuncios, foros y reportes desde un solo lugar. |
-| **Profesores** | Publicar tareas, calificar, registrar notas, observaciones y anuncios; menos papeleo y menos mensajes repetidos de padres. |
-| **Alumnos** | Ver tareas próximas, entregar, consultar calificaciones y su promedio por curso y general. |
-| **Padres / Encargados** | Consultar por **WhatsApp**, sin instalar nada: tareas pendientes, próximas, no entregadas, calificaciones y desglose por actividad, asistencia. |
+| Para                           | Valor                                                                                                                                           |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Dirección / Administración** | Control de la estructura académica, docentes, anuncios, foros y reportes desde un solo lugar.                                                   |
+| **Profesores**                 | Publicar tareas, calificar, registrar notas, observaciones y anuncios; menos papeleo y menos mensajes repetidos de padres.                      |
+| **Alumnos**                    | Ver tareas próximas, entregar, consultar calificaciones y su promedio por curso y general.                                                      |
+| **Padres / Encargados**        | Consultar por **WhatsApp**, sin instalar nada: tareas pendientes, próximas, no entregadas, calificaciones y desglose por actividad, asistencia. |
 
 ## Índice de documentación
 
-| # | Documento | Contenido |
-|---|---|---|
-| 00 | [Visión y alcance](docs/00-vision-y-alcance.md) | Problema, objetivos, alcance, fuera de alcance, métricas |
-| 01 | [Actores, roles y permisos](docs/01-roles-y-permisos.md) | Roles del sistema y matriz de permisos (RBAC) |
-| 02 | [Requerimientos funcionales](docs/02-requerimientos-funcionales.md) | Funcionalidades por módulo y por rol, con prioridad (MVP / Plus) |
-| 03 | [Modelo académico flexible](docs/03-modelo-academico.md) | Cómo soportar profesor especialista **y** profesor titular de grado |
-| 04 | [Calificaciones y promedios](docs/04-calificaciones-y-promedios.md) | Escalas, ponderaciones, fórmulas de promedio, redondeo |
-| 05 | [Arquitectura técnica](docs/05-arquitectura.md) | Stack, multi-tenancy, componentes, despliegue |
-| 06 | [Modelo de datos](docs/06-modelo-de-datos.md) | Diagrama entidad-relación y descripción de tablas |
-| 07 | [Diagramas de flujo](docs/07-flujos.md) | Flujos principales (tareas, calificación, anuncios, onboarding, etc.) |
-| 08 | [Integración WhatsApp](docs/08-integracion-whatsapp.md) | Bot para padres: menú, seguridad, plantillas, costos |
-| 09 | [API (borrador)](docs/09-api.md) | Endpoints REST iniciales |
-| 10 | [Seguridad y privacidad](docs/10-seguridad-y-privacidad.md) | Datos de menores, consentimiento, auditoría |
-| 11 | [Funcionalidades Plus y benchmark](docs/11-funcionalidades-plus.md) | Comparativa con plataformas existentes y diferenciadores para vender |
-| 12 | [Roadmap](docs/12-roadmap.md) | Fases (MVP → Asistencia → Pagos → Plus) |
-| 13 | [Convenciones de desarrollo](docs/13-convenciones-desarrollo.md) | Estructura del repo, ramas, commits, calidad |
-| 14 | [Diseño UI/UX y personalización](docs/14-diseno-ui-ux.md) | Temas por colegio, principios de diseño, personas, mapa de pantallas |
+| #   | Documento                                                           | Contenido                                                             |
+| --- | ------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| 00  | [Visión y alcance](docs/00-vision-y-alcance.md)                     | Problema, objetivos, alcance, fuera de alcance, métricas              |
+| 01  | [Actores, roles y permisos](docs/01-roles-y-permisos.md)            | Roles del sistema y matriz de permisos (RBAC)                         |
+| 02  | [Requerimientos funcionales](docs/02-requerimientos-funcionales.md) | Funcionalidades por módulo y por rol, con prioridad (MVP / Plus)      |
+| 03  | [Modelo académico flexible](docs/03-modelo-academico.md)            | Cómo soportar profesor especialista **y** profesor titular de grado   |
+| 04  | [Calificaciones y promedios](docs/04-calificaciones-y-promedios.md) | Escalas, ponderaciones, fórmulas de promedio, redondeo                |
+| 05  | [Arquitectura técnica](docs/05-arquitectura.md)                     | Stack, multi-tenancy, componentes, despliegue                         |
+| 06  | [Modelo de datos](docs/06-modelo-de-datos.md)                       | Diagrama entidad-relación y descripción de tablas                     |
+| 07  | [Diagramas de flujo](docs/07-flujos.md)                             | Flujos principales (tareas, calificación, anuncios, onboarding, etc.) |
+| 08  | [Integración WhatsApp](docs/08-integracion-whatsapp.md)             | Bot para padres: menú, seguridad, plantillas, costos                  |
+| 09  | [API (borrador)](docs/09-api.md)                                    | Endpoints REST iniciales                                              |
+| 10  | [Seguridad y privacidad](docs/10-seguridad-y-privacidad.md)         | Datos de menores, consentimiento, auditoría                           |
+| 11  | [Funcionalidades Plus y benchmark](docs/11-funcionalidades-plus.md) | Comparativa con plataformas existentes y diferenciadores para vender  |
+| 12  | [Roadmap](docs/12-roadmap.md)                                       | Fases (MVP → Asistencia → Pagos → Plus)                               |
+| 13  | [Convenciones de desarrollo](docs/13-convenciones-desarrollo.md)    | Estructura del repo, ramas, commits, calidad                          |
+| 14  | [Diseño UI/UX y personalización](docs/14-diseno-ui-ux.md)           | Temas por colegio, principios de diseño, personas, mapa de pantallas  |
 
 ## Estado
 
-📄 **Fase 0 – Documentación y diseño.** Aún no hay código. Ver [Roadmap](docs/12-roadmap.md).
+🎨 **Fase 0 – Diseño.** Documentación lista; sistema de diseño con temas por colegio en marcha. Siguiente: prototipos navegables de las pantallas MVP. Ver [Roadmap](docs/12-roadmap.md).
+
+## Desarrollo
+
+### Requisitos
+
+- Node.js 22 (ver `.nvmrc`)
+- pnpm 10 (`corepack enable` lo activa con la versión fijada en `package.json`)
+
+### Primeros pasos
+
+```bash
+pnpm install
+```
+
+```bash
+pnpm dev
+```
+
+Abre http://localhost:3000 y la guía del sistema de diseño en http://localhost:3000/sistema-diseno.
+
+### Comandos
+
+| Comando          | Qué hace                                                  |
+| ---------------- | --------------------------------------------------------- |
+| `pnpm dev`       | Levanta el portal web en modo desarrollo                  |
+| `pnpm build`     | Compila para producción                                   |
+| `pnpm lint`      | ESLint en todo el repositorio                             |
+| `pnpm typecheck` | Verificación de tipos de todos los paquetes               |
+| `pnpm test`      | Pruebas (incluye la validación de contraste de los temas) |
+| `pnpm format`    | Formatea con Prettier                                     |
+
+### Estructura
+
+```
+apps/
+  web/              Portal web (Next.js): alumnos, profesores, administración
+packages/
+  themes/           Temas por colegio: tokens de diseño y validación de contraste
+  ui/               Componentes compartidos (sistema de diseño)
+  tsconfig/         Configuración de TypeScript compartida
+docs/               Documentación funcional y técnica
+```
+
+### Cómo funcionan los temas
+
+1. Cada tema es un objeto en `packages/themes/src/themes/` (colores claro/oscuro, fuentes, radios, sombras, densidad y colores de materias).
+2. `themesToCss()` lo convierte en variables CSS `--rx-*` bajo `[data-theme="<id>"]`.
+3. `apps/web/src/app/globals.css` conecta esas variables con Tailwind (`bg-primary`, `text-muted-foreground`…).
+4. Los componentes de `packages/ui` solo usan esos nombres semánticos, nunca colores fijos.
+5. Las pruebas exigen contraste WCAG AA en cada tema: un tema nuevo con colores poco legibles no pasa la CI.
+
+Para crear el tema de un colegio nuevo: copia un tema existente, cambia sus valores, regístralo en `packages/themes/src/index.ts` y ejecuta `pnpm test`.
 
 ## Stack propuesto (resumen)
 

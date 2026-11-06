@@ -1,0 +1,8 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+
+# electron-to-chromium publica a diario; se fija una versión probada para
+# instalaciones reproducibles. Actualizar junto con browserslist.
+overrides:
+  electron-to-chromium: "1.5.463"

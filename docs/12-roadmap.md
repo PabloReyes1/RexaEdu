@@ -29,7 +29,8 @@ gantt
 - [x] Visión, alcance, roles, requerimientos.
 - [x] Modelo académico flexible, modelo de datos, flujos, arquitectura.
 - [x] Lineamientos de diseño UI/UX y personalización por colegio ([14](14-diseno-ui-ux.md)).
-- [ ] Sistema de diseño base (tokens + componentes) y 3 temas de muestra.
+- [x] Entorno de desarrollo del frontend: monorepo pnpm + Turborepo, Next.js, Tailwind, ESLint, Prettier, Vitest y CI en GitHub Actions.
+- [x] Sistema de diseño base (tokens + componentes) y 3 temas de muestra, con validación automática de contraste.
 - [ ] Prototipos navegables de las pantallas MVP: inicio alumno, libro de calificaciones, crear tarea, asistente de asignación, configuración inicial.
 - [ ] Validar con 2–3 colegios reales (entrevistas a dirección, profesores y padres).
 - [ ] Escribir ADR-0001 a ADR-0004.
